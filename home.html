@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjectBlue | SDG-6</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .hero {
+      position: relative;
+      height: 96vh;
+      background-color: #0c1c2e;
+      overflow: hidden;
+    }
+    .herobg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('bgg.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.30;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 80px;
+      max-width: 660px;
+    }
+    .hero-tag {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      color: var(--white);
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.22;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .hero-intro {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
+
+    .hero-ctas {
+      overflow: hidden;
+    }
+
+    .hero-ctas a {
+      float: left;
+      margin-right: 14px;
+    }
+    .stats-bar {
+      background-color: var(--primary);
+    }
+
+    .stats-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .stat-item {
+      float: left;
+      width: 25%;
+      padding: 28px 22px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-item .fig {
+      display: block;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      margin-bottom: 6px;
+    }
+
+    .stat-item .desc {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.45;
+    }
+    .mission-wrap {
+      background-color: #f2f8fd;
+      padding: 80px 28px;
+    }
+    .drop-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 18px;
+    }
+
+    .drop-list li {
+      font-size: 0.83rem;
+      color: var(--text-mid);
+      padding: 5px 0 5px 18px;
+      border-bottom: 1px solid #e4eff6;
+    }
+
+    .drop-list li:last-child { border-bottom: none; }
+
+    .gallery-wrap {
+      background-color: #0f1e33;
+      padding: 72px 0 0;
+    }
+
+    .gallery-wrap .section-title h2 { color: var(--white); }
+    .gallery-wrap .section-title p  { color: rgba(255,255,255,0.45); }
+    .tile-grid { overflow: hidden; }
+
+    .tile {
+      position: relative;
+      float: left;
+      width: 25%;
+      height: 300px;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+    }
+
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+
+    
+    .tile:hover img { opacity: 0.4; }
+    .tile:hover .tile-info { bottom: 0; }
+    .tile-info {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      padding: 22px;
+      background-color: rgba(8,18,32,0.92);
+    }
+
+    .tile-region {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 5px;
+    }
+
+    .tile-info h3 { color: var(--white); font-size: 0.95rem; margin-bottom: 6px; }
+    .tile-info p  { color: rgba(255,255,255,0.65); font-size: 0.76rem; margin: 0; }
+
+    .tile-num {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background-color: rgba(26,159,212,0.85);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+    }
+    @media (max-width: 860px) {
+      .hero-content     { padding: 80px 28px 60px; }
+      .hero h1          { font-size: 1.8rem; }
+      .stat-item        { width: 50%; }
+      .tile             { width: 50%; height: 220px; }
+    }
+
+    @media (max-width: 560px) {
+      .hero             { height: auto; min-height: 80vh; }
+      .hero-content     { padding: 60px 20px 40px; }
+      .hero h1          { font-size: 1.5rem; }
+      .tile             { width: 100%; height: 200px; }
+      .hero-ctas a      { float: none; display: block; margin-bottom: 10px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="Project Blue logo - blue water drop emblem">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links" aria-label="Main navigation">
+      <li><a href="home.html" class="active" aria-current="page">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="ais.html">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-label="Homepage hero">
+    <div class="herobg"  role="presentation"></div>
+    <div class="herocolor" role="presentation"></div>
+    <div class="hero-content">
+      <span class="hero-tag">UN SDG Goal 6</span>
+      <h1>Millions still have<br>no access to<br><em>safe, clean water.</em></h1>
+      <p class="hero-intro">
+        In Chad, Somalia, and Ethiopia, clean water is not a given, it is a daily struggle.
+        Project Blue documents the scale of this crisis and the actions that can change it.
+      </p>
+      <div class="hero-ctas">
+        <a href="content_ST1.html" class="btn btn-primary"
+           title="Student 1 - The Scale of the Crisis (content_ST1.html)">
+          View the Crisis Report
+        </a>
+        <a href="ais.html" class="btn btn-ghost">Take the Impact Simulator</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-bar" aria-label="Key water crisis statistics">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <span class="fig">400M+</span>
+        <span class="desc">people in Sub-Saharan Africa without basic water access</span>
+      </div>
+      <div class="stat-item">
+        <span class="fig">6 hrs</span>
+        <span class="desc">average daily water collection time for women in affected regions</span>
+      </div>
+      <div class="stat-item">
+        <span class="fig">485K</span>
+        <span class="desc">deaths per year from preventable waterborne diseases</span>
+      </div>
+      <div class="stat-item">
+        <span class="fig">2030</span>
+        <span class="desc">SDG 6 deadline - the world is currently not on track</span>
+      </div>
+    </div>
+  </section>
+  <section class="mission-wrap" aria-label="Mission and goal promotion">
+    <div class="container">
+      <div class="section-title">
+        <h2>Why SDG 6 Cannot Wait</h2>
+        <p>Clean water is not a luxury. It is the foundation of health, education, and human dignity and billions are still without it.</p>
+      </div>
+      <div class="grid-3">
+
+        <article class="card" aria-label="The reality of contaminated water">
+          <img class="card-img" src="b.jpeg"
+            alt="A child holding two glasses, one with dirty water and one with clean water">
+          <div class="card-body">
+            <h3>Two Glasses. One Choice They Never Had.</h3>
+            <p>In rural Ethiopia and Chad, contaminated water is not the worst option it is often the only one. Children drink what they can find, and the consequences are severe and preventable.</p>
+            <ul class="drop-list">
+              <li>Diarrhoeal disease kills a child every 2 minutes</li>
+              <li>Contaminated water spreads cholera, typhoid, and dysentery</li>
+              <li>Safe water access could prevent 1.4 million deaths per year</li>
+            </ul>
+            <a href="content_ST1.html" class="btn btn-outline">See the Data</a>
+          </div>
+        </article>
+
+        <article class="card" aria-label="Community water access">
+          <img class="card-img" src="c.jpeg"
+            alt="Multiple pairs of hands reaching under a flowing water pipe, sharing a scarce communal water source">
+          <div class="card-body">
+            <h3>One Pipe. An Entire Village.</h3>
+            <p>Where infrastructure exists at all, it is shared by hundreds. A single standpipe can mean a queue that begins before dawn and does not end until nightfall.</p>
+            <ul class="drop-list">
+              <li>Over 40% of rural Africa relies on shared unprotected sources</li>
+              <li>Women and girls carry over 70% of the water-collection burden</li>
+              <li>School attendance drops sharply without on-site water access</li>
+            </ul>
+            <a href="content_ST2.html" class="btn btn-outline">Water &amp; Communities</a>
+          </div>
+        </article>
+
+        <article class="card" aria-label="What access to clean water changes">
+          <img class="card-img" src="d.jpeg"
+            alt="the joy of clean water">
+          <div class="card-body">
+            <h3>This Is What Change Looks Like.</h3>
+            <p>When clean water arrives in a community, everything changes. Children go to school. Mothers reclaim hours of their day. This is achievable — and it starts with awareness.</p>
+            <ul class="drop-list">
+              <li>Every $1 invested in water returns $4 in economic benefit</li>
+              <li>Girls' school enrolment rises by up to 15% with water on-site</li>
+              <li>Simple filtration can reduce child mortality by over 40%</li>
+            </ul>
+            <a href="ais.html" class="btn btn-outline">Take Action</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-wrap" aria-label="Topic gallery - links to content pages">
+    <div class="container">
+      <div class="section-title">
+        <h2>Explore the Crisis by Topic</h2>
+        <p>Four in-depth investigations into the water crisis across the most affected regions.</p>
+      </div>
+    </div>
+    <div class="tile-grid">
+
+      <a href="content_ST1.html" class="tile"
+         aria-label="Topic 1: The Scale of the Crisis - Student 1 content page">
+        <img src="e.jpeg" alt="A person drinking directly from a contaminated open water source in Sub-Saharan Africa">
+        <span class="tile-num">01</span>
+        <div class="tile-info">
+          <p class="tile-region">Ethiopia |Chad |Somalia</p>
+          <h3>The Scale of the Crisis</h3>
+          <p>Data and the full picture of who is affected and why.</p>
+        </div>
+      </a>
+
+      <a href="content_ST2.html" class="tile"
+         aria-label="Topic 2: Dirty Water Hidden Danger - Student 2 content page">
+        <img src="f.jpeg" alt="Child holding one glass of dirty water and one of clean water illustrating water quality contrast">
+        <span class="tile-num">02</span>
+        <div class="tile-info">
+          <p class="tile-region">Water Quality</p>
+          <h3>Dirty Water, Hidden Danger</h3>
+          <p>What makes water unsafe and what can be done about it.</p>
+        </div>
+      </a>
+
+      <a href="content_ST3.html" class="tile"
+         aria-label="Topic 3: The Sanitation Gap - Student 3 content page">
+        <img src="g.jpeg" alt="Child filling a bucket from a slow-running tap representing limited water access">
+        <span class="tile-num">03</span>
+        <div class="tile-info">
+          <p class="tile-region">Sanitation - SDG 6</p>
+          <h3>The Sanitation Gap</h3>
+          <p>Why clean water alone is not enough — the missing layer.</p>
+        </div>
+      </a>
+
+      <a href="content_ST4.html" class="tile"
+         aria-label="Topic 4: Solutions From the Ground Up - Student 4 content page">
+        <img src="h.jpeg" alt="Multiple hands sharing water from a communal pipe showing collective dependence on scarce water sources">
+        <span class="tile-num">04</span>
+        <div class="tile-info">
+          <p class="tile-region">Community Action</p>
+          <h3>Solutions From the Ground Up</h3>
+          <p>Local initiatives and partnerships making real impact.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Team</h4>
+      <a href="pageEditor_ST1.html">Page Editor</a>
+      <a href="validation_ST1.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>Swosti Tamrakar | w2148847 | Student 1</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+
+
+</body>
+</html>

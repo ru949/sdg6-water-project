@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sanitation Gap  ProjectBlue (SDG-6)</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+ 
+  <style>
+ 
+    .content-wrap {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+ 
+    .side-nav {
+      position: sticky;
+      top: 70px;
+      width: 220px;
+      flex-shrink: 0;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+      background-color: #0b1a2c;
+      padding: 32px 0 40px;
+      align-self: flex-start;
+    }
+
+    .side-nav h4 {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      padding: 0 24px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 8px;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .side-nav ul li a {
+      display: block;
+      padding: 10px 24px;
+      font-size: 0.83rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .side-nav ul li a:hover,
+    .side-nav ul li a:focus {
+      color: var(--accent-light);
+      border-left-color: var(--accent);
+      background: rgba(26,159,212,0.08);
+    }
+ 
+    .page-content {
+      flex: 1;
+      padding: 0 0 80px;
+      min-width: 0;
+    }
+ 
+    .content-hero {
+      position: relative;
+      height: 380px;
+      background-color: #0b1a2c;
+      overflow: hidden;
+    }
+
+    .content-herobg {
+      position: absolute;
+      inset: 0;
+      background-position: center;
+      opacity: 0.35;
+    }
+
+    .content-herocolor {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(10,30,50,0.55);
+    }
+
+    .content-hero-text {
+      position: relative;
+      z-index: 2;
+      padding: 80px 56px;
+      max-width: 700px;
+    }
+
+    .content-hero-text h1 {
+      color: var(--white);
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .content-hero-text h1 em {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .content-hero-text p {
+      color: rgba(255,255,255,0.70);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 540px;
+    }
+ 
+    .content-section {
+      padding: 60px 56px;
+      border-bottom: 1px solid #e0eef7;
+    }
+
+    .content-section:nth-child(even) {
+      background-color: #f2f8fd;
+    }
+
+    .content-section h2 {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .content-section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 24px 0 10px;
+    }
+
+    .content-section p {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      max-width: 780px;
+    }
+ 
+    .content-img {
+      width: 100%;
+      max-width: 680px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 4px 18px rgba(11,26,44,0.14);
+      margin: 24px 0;
+      display: block;
+    }
+
+    .img-caption {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      margin-top: -16px;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+ 
+    .fact-box {
+      background: linear-gradient(135deg, #0b1a2c, #0a3d55);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+
+    .fact-box p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    .fact-box p:last-child { margin-bottom: 0; }
+
+    .fact-box strong {
+      color: var(--accent-light);
+    }
+ 
+    .stat-row {
+      overflow: hidden;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+
+    .stat-row .stat-block {
+      float: left;
+      width: 30%;
+      margin-right: 5%;
+      text-align: center;
+      padding: 20px 10px;
+      background: #f2f8fd;
+      border-radius: 8px;
+    }
+
+    .stat-row .stat-block:last-child { margin-right: 0; }
+
+    .stat-row .stat-block .fig {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .stat-row .stat-block .desc {
+      font-size: 0.72rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+ 
+    .action-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 24px;
+      max-width: 680px;
+    }
+
+    .action-list li {
+      padding: 10px 0 10px 22px;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      border-bottom: 1px solid #e0eef7;
+      position: relative;
+    }
+
+    .action-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    .action-list li:last-child { border-bottom: none; }
+ 
+    .go-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background-color: var(--accent);
+      color: var(--white);
+      padding: 10px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(26,159,212,0.45);
+      transition: background-color 0.2s;
+      z-index: 100;
+    }
+
+    .go-top:hover { background-color: var(--primary); }
+ 
+    @media (max-width: 860px) {
+      .content-wrap { flex-direction: column; }
+      .side-nav {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 20px 0;
+      }
+      .side-nav ul { display: flex; flex-wrap: wrap; }
+      .side-nav ul li a { padding: 8px 16px; border-left: none; border-bottom: 2px solid transparent; }
+      .content-hero-text { padding: 50px 28px; }
+      .content-hero-text h1 { font-size: 1.7rem; }
+      .content-section { padding: 40px 28px; }
+      .stat-row .stat-block { width: 100%; float: none; margin-right: 0; margin-bottom: 12px; }
+    }
+
+  </style>
+</head>
+<body>
+ 
+<a id="top"></a>
+ 
+<header>
+  <nav aria-label="Main navigation">
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="ProjectBlue logo">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="ais.html">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="content-wrap">
+ 
+    <nav class="side-nav" aria-label="Page section navigation">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#what-is-sanitation">What Is Sanitation?</a></li>
+        <li><a href="#scale">The Scale of the Gap</a></li>
+        <li><a href="#consequences">Health Consequences</a></li>
+        <li><a href="#women-girls">Women &amp; Girls</a></li>
+        <li><a href="#schools">Schools &amp; Education</a></li>
+        <li><a href="#solutions">Solutions That Work</a></li>
+        <li><a href="#action">Take Action</a></li>
+      </ul>
+    </nav>
+ 
+    <div class="page-content">
+ 
+      <section class="content-hero" aria-label="Content page hero for The Sanitation Gap">
+        <div class="content-herobg" role="presentation"></div>
+        <div class="content-herocolor" role="presentation"></div>
+        <div class="content-hero-text">
+          <span class="hero-tag">SDG 6  Student 3 Content</span>
+          <h1>The Sanitation Gap:<br><em>The Missing Layer</em></h1>
+          <p>Clean water gets the headlines — but without safe toilets, proper hygiene, and waste management, water alone cannot save lives. This is the story of sanitation's critical role in SDG 6.</p>
+        </div>
+      </section>
+ 
+      <section class="content-section" id="overview" aria-labelledby="overview-heading">
+        <h2 id="overview-heading">Overview</h2>
+        <p>When people talk about the global water crisis, the conversation usually starts and ends with drinking water. But SDG 6 is not just about water — it is about clean water <em>and</em> sanitation. These two components are inseparable, and failing to address sanitation means the gains made in water access are quickly undone.</p>
+        <p>Today, approximately 3.5 billion people — nearly half the world's population — live without access to safely managed sanitation. In Sub-Saharan Africa and South Asia, open defecation, lack of proper toilets, and poor hygiene facilities continue to kill hundreds of thousands of people every year, most of them children under five.</p>
+
+        <div class="stat-row" role="region" aria-label="Key sanitation statistics">
+          <div class="stat-block">
+            <span class="fig">3.5B</span>
+            <span class="desc">people without safely managed sanitation</span>
+          </div>
+          <div class="stat-block">
+            <span class="fig">494K</span>
+            <span class="desc">deaths per year from diarrhoeal disease linked to poor sanitation</span>
+          </div>
+          <div class="stat-block">
+            <span class="fig">673M</span>
+            <span class="desc">people still practising open defecation globally</span>
+          </div>
+        </div>
+        <img src="image/Areial view of rural village.jpeg" alt="Aerial view of rural village">
+        <p class="img-caption">Many communities in rural Sub-Saharan Africa lack any formal sanitation infrastructure.</p>
+      </section>
+ 
+      <section class="content-section" id="what-is-sanitation" aria-labelledby="sanitation-heading">
+        <h2 id="sanitation-heading">What Is Sanitation?</h2>
+        <p>Sanitation refers to the systems and behaviours that keep human waste safely managed and away from people's immediate environment. It encompasses far more than just toilets:</p>
+
+        <h3>The Three Pillars of Sanitation</h3>
+        <ul class="action-list">
+          <li><strong>Toilet facilities:</strong> Safe, hygienic spaces to defecate and urinate, connected to proper waste disposal systems.</li>
+          <li><strong>Handwashing:</strong> Access to clean water and soap at key moments — after using the toilet and before eating — to prevent the spread of disease.</li>
+          <li><strong>Waste treatment:</strong> Systems to safely collect, transport, and treat human waste so it does not contaminate water sources or soil.</li>
+        </ul>
+
+        <p>Without all three pillars working together, even communities with access to clean water can see disease reintroduced through contaminated hands, unmanaged waste seeping into groundwater, or shared open defecation fields near homes and schools.</p>
+
+        <div class="fact-box" role="region" aria-label="Key fact about sanitation">
+          <p><strong>Key fact:</strong> The WHO estimates that for every $1 invested in sanitation, society gains approximately <strong>$5.50</strong> in economic returns through reduced healthcare costs, lower mortality, and increased productivity.</p>
+          <p>Yet sanitation receives far less international aid and attention than clean water supply — creating a structural gap that perpetuates cycles of poverty and disease.</p>
+        </div>
+      </section>
+ 
+      <section class="content-section" id="scale" aria-labelledby="scale-heading">
+        <h2 id="scale-heading">The Scale of the Gap</h2>
+        <img src="image/Collecting water.jpeg" alt="Global sanitation deficit">
+        <p>The scale of the global sanitation deficit is staggering, and progress under SDG 6 is dangerously off track. At the current rate, the world will not achieve universal basic sanitation until well into the 2050s — more than two decades past the 2030 target.</p>
+        <p class="img-caption">In regions without sanitation infrastructure, water sources become contaminated by human waste — creating a deadly cycle.</p>
+
+        <h3>Regional Breakdown</h3>
+        <p>The burden is not evenly distributed. Sub-Saharan Africa and Central and Southern Asia account for the vast majority of the world's sanitation deficit. In Chad, fewer than 1 in 10 people have access to basic sanitation services. In Somalia, the figure drops even lower in rural areas. Ethiopia, despite decades of international aid, still has millions of people practising open defecation.</p>
+
+        <ul class="action-list">
+          <li>Sub-Saharan Africa: over 770 million people lack basic sanitation</li>
+          <li>South Asia: approximately 600 million still defecate in the open or in unimproved facilities</li>
+          <li>In least developed countries (LDCs), only 28% of the population uses safely managed sanitation</li>
+          <li>Progress has slowed since 2015, with population growth outpacing sanitation investment in some regions</li>
+        </ul>
+      </section>
+ 
+      <section class="content-section" id="consequences" aria-labelledby="consequences-heading">
+        <h2 id="consequences-heading">Health Consequences</h2>
+        <p>Poor sanitation is one of the leading preventable causes of death and illness globally. The pathway from contaminated waste to human disease is short and devastating, particularly for children and the elderly.</p>
+
+        <h3>Waterborne and Sanitation-Related Diseases</h3>
+        <p>When human waste is not safely managed, it contaminates drinking water sources, soil, and food. This creates conditions for a range of diseases:</p>
+
+        <ul class="action-list">
+          <li><strong>Cholera:</strong> Spreads rapidly through contaminated water; causes severe dehydration and can kill within hours if untreated.</li>
+          <li><strong>Typhoid:</strong> A bacterial infection spread through faecal contamination of water and food; responsible for millions of cases annually.</li>
+          <li><strong>Diarrhoeal disease:</strong> The second leading cause of death in children under five; largely preventable with safe water and sanitation.</li>
+          <li><strong>Intestinal worms:</strong> Soil-transmitted helminths affect over 1.5 billion people, causing malnutrition and stunting in children.</li>
+          <li><strong>Hepatitis A:</strong> Transmitted through food and water contaminated with faecal matter; common in regions lacking sanitation.</li>
+        </ul>
+
+        <img src="image/Oral rehyrdation.jpeg" alt="Health clinic treating dehydration from diarrhoeal disease">
+        <p class="img-caption">Waterborne diseases linked to poor sanitation overwhelm health clinics across the most affected regions.</p>
+
+        <div class="fact-box" role="region" aria-label="Child mortality fact">
+          <p>A child dies from diarrhoeal disease approximately <strong>every 2 minutes</strong>. The vast majority of these deaths are directly linked to unsafe water, poor sanitation, and lack of hygiene — and are entirely preventable.</p>
+          <p>Improving sanitation to even a basic level could prevent an estimated <strong>1.4 million deaths per year</strong>.</p>
+        </div>
+      </section>
+ 
+      <section class="content-section" id="women-girls" aria-labelledby="women-heading">
+        <h2 id="women-heading">Women &amp; Girls: The Hidden Cost</h2>
+        <p>The sanitation crisis does not affect everyone equally. Women and girls bear a disproportionate burden — not just in health terms, but in safety, dignity, and opportunity.</p>
+
+        <p>Without access to private, safe toilet facilities, women and girls are often forced to defecate in the open — frequently in darkness, early morning, or late at night to avoid being seen. This exposes them to serious safety risks, including assault and harassment.</p>
+
+        <h3>Menstrual Hygiene</h3>
+        <p>For adolescent girls, the absence of adequate school sanitation creates a significant barrier to education. Without private, hygienic spaces to manage menstruation, many girls miss school for several days each month — or drop out entirely. This directly undermines progress on gender equality (SDG 5) and quality education (SDG 4), illustrating how the SDGs are deeply interconnected.</p>
+
+        <ul class="action-list">
+          <li>Girls are 1.5 times more likely to drop out of school in regions lacking adequate sanitation</li>
+          <li>Menstrual hygiene management requires private, clean toilet facilities that most schools in affected regions do not have</li>
+          <li>Safety risks from open defecation disproportionately affect women and girls, especially at night</li>
+          <li>Women also carry the primary burden of water and sanitation management within the household</li>
+        </ul>
+      </section>
+ 
+      <section class="content-section" id="schools" aria-labelledby="schools-heading">
+        <h2 id="schools-heading">Schools &amp; Education</h2>
+        <p>The condition of sanitation in schools is a direct indicator of educational equity. Studies consistently show that student attendance — particularly among girls — rises sharply when schools have clean, private, sex-separated toilet facilities and handwashing stations with soap.</p>
+        <img src="image/Handwashing in school.jpeg" alt="Handwashing in school">
+        <p class="img-caption">Access to handwashing stations in schools has been shown to reduce illness-related absences by up to 45%.</p>
+
+        <h3>The Evidence for School WASH</h3>
+        <ul class="action-list">
+          <li>Schools with adequate WASH (Water, Sanitation &amp; Hygiene) facilities see up to 15% higher enrolment rates for girls</li>
+          <li>Handwashing with soap in schools reduces the incidence of diarrhoeal disease by up to 45%</li>
+          <li>Children who miss fewer school days due to illness achieve significantly better academic outcomes</li>
+          <li>School-based hygiene education creates lifelong behaviour change that extends to the wider community</li>
+        </ul>
+
+        <p>Investing in school WASH is therefore not just a sanitation intervention — it is an education intervention, a gender equality intervention, and a public health intervention all at once.</p>
+      </section>
+
+      <!-- SECTION 7: SOLUTIONS -->
+      <section class="content-section" id="solutions" aria-labelledby="solutions-heading">
+        <h2 id="solutions-heading">Solutions That Work</h2>
+        <p>Progress is possible. Communities and governments that have prioritised sanitation have seen dramatic reductions in disease burden, improvements in school attendance, and increased economic productivity. Here are approaches that have been proven to work:</p>
+
+        <h3>Community-Led Total Sanitation (CLTS)</h3>
+        <p>CLTS is an approach that mobilises communities to collectively eliminate open defecation. Rather than providing hardware (toilets), it focuses on triggering community-wide behaviour change through facilitated exercises that make people recognise the dangers of open defecation. Countries including Bangladesh, India, and Indonesia have used CLTS to achieve dramatic reductions in open defecation at scale.</p>
+
+        <h3>Simple, Low-Cost Sanitation Technologies</h3>
+        <ul class="action-list">
+          <li><strong>Pit latrines with slabs:</strong> Basic but dramatically safer than open defecation; reduces contact with human waste.</li>
+          <li><strong>Ventilated Improved Pit (VIP) latrines:</strong> Reduce flies and odours while being affordable for low-income households.</li>
+          <li><strong>Ecological sanitation (EcoSan):</strong> Systems that safely recycle human waste as fertiliser, addressing both sanitation and food security.</li>
+          <li><strong>Container-based sanitation:</strong> Portable toilet solutions for dense urban informal settlements where conventional sewers are impractical.</li>
+        </ul>
+
+        <h3>Hygiene Promotion</h3>
+        <p>Even simple, low-cost interventions like soap distribution and hygiene education campaigns have been shown to cut disease transmission rates significantly. Handwashing with soap at key moments can reduce diarrhoea rates by up to 48%.</p>
+
+        <div class="fact-box" role="region" aria-label="Return on investment fact">
+          <p>Every <strong>$1 invested in sanitation</strong> generates approximately <strong>$5.50 in economic returns</strong> — through reduced healthcare costs, fewer lost working days, and improved school attendance.</p>
+          <p>The economic case for sanitation investment is overwhelming. The barrier is political will, not resources.</p>
+        </div>
+      </section>
+
+      <!-- SECTION 8: ACTION -->
+      <section class="content-section" id="action" aria-labelledby="action-heading">
+        <h2 id="action-heading">What You Can Do</h2>
+        <p>The sanitation gap is a solvable problem. Individuals, students, and communities all have a role to play in driving awareness, advocacy, and change.</p>
+
+        <h3>As a Student</h3>
+        <ul class="action-list">
+          <li>Raise awareness by sharing verified statistics and stories about the global sanitation crisis on social media and in your community.</li>
+          <li>Support organisations like WaterAid, UNICEF WASH, and UNHCR through fundraising events or campus campaigns.</li>
+          <li>Write to your local representative or MP urging the UK government to maintain overseas aid commitments to sanitation programmes.</li>
+          <li>Join student societies focused on sustainable development goals and global health.</li>
+        </ul>
+
+        <h3>Explore the Programmes</h3>
+        <p>Our <a href="feedback.html" title="Feedback and Programme Directory">Feedback &amp; Programme Directory</a> lists four major organisations working on sanitation and water access globally. Visit it to find volunteer opportunities, campaigns you can join from the UK, and ways to contribute to solutions.</p>
+
+        <p>You can also explore the interactive <a href="ais.html" title="SDG Action Impact Simulator">SDG Action Impact Simulator</a> to see how the actions you take translate into measurable impact on the water and sanitation crisis.</p>
+
+        <div class="fact-box" role="region" aria-label="Call to action">
+          <p>Sanitation is not a marginal issue. It is the foundation of public health, education, gender equality, and human dignity. The 2030 deadline for SDG 6 is fast approaching — and the world is not on track.</p>
+          <p><strong>But change is possible — and it starts with awareness.</strong></p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+ 
+<a href="#top" class="go-top" aria-label="Go to top of page">↑ Top</a>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+    <div class="footer-section">
+      <h4>Student 3</h4>
+      <a href="pageEditor_ST3.html">Page Editor</a>
+      <a href="validation_ST3.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>[Ruchee Tuladhar w2148853] | Student 3</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+
+</body>
+</html>

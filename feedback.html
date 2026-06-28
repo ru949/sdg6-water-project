@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback & Programme Directory  ProjectBlue (SDG-6)</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    .feedback-hero {
+      background: linear-gradient(135deg, #0b1a2c 0%, #0a3d55 100%);
+      padding: 80px 64px 60px;
+      text-align: center;
+    }
+
+    .feedback-hero h1 {
+      color: var(--white);
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .feedback-hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .programme-section {
+      background-color: #f2f8fd;
+      padding: 64px 0 48px;
+    }
+
+    .programme-controls {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+      padding: 0 28px;
+      overflow: hidden;
+    }
+
+    .programme-controls label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-right: 10px;
+    }
+
+    .sort-dropdown {
+      appearance: none;
+      background-color: var(--white);
+      border: 1px solid #cce0ef;
+      border-radius: 4px;
+      padding: 8px 36px 8px 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231a9fd4' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    .sort-dropdown:focus {
+      outline: 2px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    .programme-scroll {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px 16px;
+      overflow-x: auto;
+    }
+
+    .programme-grid {
+      display: flex;
+      gap: 24px;
+      min-width: max-content;
+    }
+
+    .prog-card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(11,26,44,0.08);
+      width: 270px;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .prog-card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .prog-card-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .prog-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .prog-card-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .prog-card-body p {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .prog-card .btn-outline:hover {
+      background-color: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+
+    .reviews-section {
+      background-color: var(--white);
+      padding: 64px 0;
+    }
+
+    .reviews-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .rating-summary {
+      overflow: hidden;
+      margin-bottom: 40px;
+      padding: 28px 32px;
+      background: linear-gradient(135deg, #0b1a2c, #0a3d55);
+      border-radius: 8px;
+    }
+
+    .rating-score {
+      float: left;
+      margin-right: 32px;
+    }
+
+    .rating-score .big-num {
+      display: block;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      line-height: 1;
+    }
+
+    .rating-score .rating-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .rating-meta {
+      padding-top: 8px;
+    }
+
+    .rating-meta p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .reviews-grid {
+      overflow: hidden;
+    }
+
+    .review-card {
+      float: left;
+      width: 31%;
+      margin-right: 3.5%;
+      background: #f2f8fd;
+      border-radius: 8px;
+      padding: 22px 20px;
+    }
+
+    .review-card:last-child { margin-right: 0; }
+
+    .review-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .review-card p {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .review-card .see-more {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .review-card .see-more:hover { text-decoration: underline; }
+
+    .review-footer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #d5e9f5;
+      overflow: hidden;
+    }
+
+    .reviewer-name {
+      float: left;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .review-rating {
+      float: right;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .reviewer-date {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-mid);
+      margin-top: 2px;
+    }
+
+    .form-section {
+      background-color: #f2f8fd;
+      padding: 64px 0;
+    }
+
+    .form-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #cce0ef;
+      border-radius: 4px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--white);
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-group input.error,
+    .form-group textarea.error,
+    .form-group select.error {
+      border-color: #e04040;
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.76rem;
+      color: #e04040;
+      margin-top: 4px;
+    }
+
+    .error-msg.visible { display: block; }
+
+    .char-counter {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .char-counter.warning { color: #e08c00; }
+    .char-counter.danger  { color: #e04040; }
+ 
+    .confirm-msg {
+      display: none;
+      background: #d4f0e0;
+      border: 1px solid #50c878;
+      border-radius: 6px;
+      padding: 18px 22px;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #1a6b3a;
+      font-weight: 700;
+    }
+ 
+    @media (max-width: 860px) {
+      .feedback-hero { padding: 60px 28px 40px; }
+      .feedback-hero h1 { font-size: 1.6rem; }
+      .review-card { width: 100%; float: none; margin-right: 0; margin-bottom: 20px; }
+      .rating-score { float: none; margin-bottom: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main navigation">
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="ProjectBlue logo">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="ais.html">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html" class="active" aria-current="page">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="feedback-hero" aria-label="Feedback page hero">
+    <span class="hero-tag">SDG 6  Clean Water &amp; Sanitation</span>
+    <h1>Get Involved. Make a Difference.</h1>
+    <p>Explore real-world programmes tackling the global water and sanitation crisis, read what volunteers and advocates say, and share your own feedback with us.</p>
+  </section>
+
+  <section class="programme-section" aria-label="SDG-6 programme directory" id="programmes">
+    <div class="programme-controls">
+      <div class="section-title">
+        <h2>Water &amp; Sanitation Programmes</h2>
+        <p>Discover leading organisations working on the frontlines of SDG 6. Filter by category to find the right 
+          opportunity for you.</p>
+      </div>
+      <label for="sort-select">Filter by:</label>
+      <select class="sort-dropdown" id="sort-select" aria-label="Filter programmes by category">
+        <option value="popular">Most Popular</option>
+        <option value="volunteering">Volunteering</option>
+        <option value="campaign">Campaign</option>
+        <option value="student">Student-Friendly</option>
+        <option value="community">Community</option>
+      </select>
+    </div>
+    <div class="programme-scroll">
+      <div class="programme-grid" role="list" aria-label="Programme cards">
+        <div role="listitem">
+          <article class="prog-card" aria-label="WaterAid programme">
+              <img class="prog-card-img" src="image/Installing_water_pump.jpeg"
+              alt="Comminity using new water pump">
+              
+            <div class="prog-card-body">
+              <span class="prog-tag">Volunteering</span>
+              <h3>WaterAid  Community Water Access</h3>
+              <p>WaterAid works in 28 countries to deliver clean water, decent toilets, and good hygiene to the world's poorest communities. Join as a volunteer or fundraiser.</p>
+              <a href="https://www.wateraid.org" class="btn btn-outline" target="_blank" rel="noopener noreferrer"
+                 aria-label="Learn more about WaterAid (opens in new tab)">Learn More</a>
+            </div>
+          </article>
+        </div>
+
+        <div role="listitem">
+          <article class="prog-card" aria-label="UNICEF WASH programme">
+            <img class="prog-card-img" src="image/Handwashing in school.jpeg"
+              alt="UNICEF handwash station in a school in South Sudan with children washing their hands">
+            <div class="prog-card-body">
+              <span class="prog-tag">Campaign</span>
+              <h3>UNICEF WASH  Schools &amp; Communities</h3>
+              <p>UNICEF's WASH programme ensures children have access to safe water and sanitation in schools and emergencies. Support their campaigns or fundraise on campus.</p>
+              <a href="https://www.unicef.org/wash" class="btn btn-outline" target="_blank" rel="noopener noreferrer"
+                 aria-label="Learn more about UNICEF WASH (opens in new tab)">Learn More</a>
+            </div>
+          </article>
+        </div>
+
+        <div role="listitem">
+          <article class="prog-card" aria-label="UNHCR Water Sanitation programme">
+              <img class="prog-card-img" src="image/Water sanitation.jpeg"
+              alt="UNHCR water and sanitation facilities in a refugee camp in South Sudan">
+            <div class="prog-card-body">
+              <span class="prog-tag">Student-Friendly</span>
+              <h3>UNHCR Water in Refugee Settings</h3>
+              <p>UNHCR delivers safe water and sanitation to displaced populations in crisis zones. Students can raise awareness, fundraise, or apply for internships.</p>
+              <a href="https://www.unhcr.org" class="btn btn-outline" target="_blank" rel="noopener noreferrer"
+                 aria-label="Learn more about UNHCR water programmes (opens in new tab)">Learn More</a>
+            </div>
+          </article>
+        </div>
+
+        <div role="listitem">
+          <article class="prog-card" aria-label="WHO safe water programme">
+             <img class="prog-card-img" src="image/water quality testing .jpeg"
+              alt="People testing water quality in a community setting">
+            <div class="prog-card-body">
+              <span class="prog-tag">Community</span>
+              <h3>WHO  Safe Drinking Water Initiative</h3>
+              <p>The World Health Organisation leads global water quality standards and sanitation guidelines. Explore their resources, reports, and community engagement programmes.</p>
+              <a href="https://www.who.int/health-topics/drinking-water" class="btn btn-outline" target="_blank" rel="noopener noreferrer"
+                 aria-label="Learn more about WHO drinking water initiative (opens in new tab)">Learn More</a>
+            </div>
+          </article>
+        </div>
+
+      </div> 
+    </div> 
+  </section>
+ 
+  <section class="reviews-section" aria-label="Programme reviews and ratings" id="reviews">
+    <div class="reviews-inner">
+      <div class="section-title">
+        <h2>What Volunteers Are Saying</h2>
+        <p>Real feedback from people who have engaged with these water and sanitation programmes.</p>
+      </div>
+ 
+      <div class="rating-summary" role="region" aria-label="Overall rating summary">
+        <div class="rating-score">
+          <span class="big-num">8.7</span>
+          <span class="rating-label">Excellent</span>
+        </div>
+        <div class="rating-meta">
+          <p>Based on 214 verified volunteer and participant reviews</p>
+          <p>Programmes reviewed: WaterAid · UNICEF WASH · UNHCR · WHO</p>
+        </div>
+      </div>
+ 
+      <div class="reviews-grid" role="list" aria-label="Individual reviews">
+
+        <div role="listitem">
+          <article class="review-card" aria-label="Review by Sarah M.">
+            <h3>Life-Changing Experience with WaterAid</h3>
+            <p>Volunteering with WaterAid in rural Tanzania gave me a completely new perspective on what we take for granted.
+               The organisation is incredibly well-structured and the impact is visible immediately...</p>
+            <a href="#" class="see-more" aria-label="See more of Sarah's review">See more</a>
+            <div class="review-footer">
+              <span class="reviewer-name">Sarah M.
+                <span class="reviewer-date">March 2025</span>
+              </span>
+              <span class="review-rating">9.5 / 10</span>
+            </div>
+          </article>
+        </div>
+
+        <div role="listitem">
+          <article class="review-card" aria-label="Review by James K.">
+            <h3>UNICEF WASH  Meaningful Campus Campaign</h3>
+            <p>Running a UNICEF WASH fundraising campaign at our university was straightforward thanks to their student toolkit.
+               We raised over £800 in two weeks and the support team was brilliant...</p>
+            <a href="#" class="see-more" aria-label="See more of James's review">See more</a>
+            <div class="review-footer">
+              <span class="reviewer-name">James K.
+                <span class="reviewer-date">January 2025</span>
+              </span>
+              <span class="review-rating">8.5 / 10</span>
+            </div>
+          </article>
+        </div>
+
+        <div role="listitem">
+          <article class="review-card" aria-label="Review by Amara D.">
+            <h3>UNHCR Internship  Eye-Opening &amp; Rewarding</h3>
+            <p>As a student intern with UNHCR's WASH team, I worked on sanitation planning for a camp in South Sudan. 
+              The experience was demanding but deeply meaningful and well supported...</p>
+            <a href="#" class="see-more" aria-label="See more of Amara's review">See more</a>
+            <div class="review-footer">
+              <span class="reviewer-name">Amara D.
+                <span class="reviewer-date">November 2024</span>
+              </span>
+              <span class="review-rating">9.0 / 10</span>
+            </div>
+          </article>
+        </div>
+
+      </div> 
+    </div>
+  </section>
+ 
+  <section class="form-section" aria-label="User feedback form" id="feedback-form">
+    <div class="form-inner">
+      <div class="section-title">
+        <h2>Share Your Feedback</h2>
+        <p>Have you engaged with one of these programmes, or do you have thoughts on the water crisis?
+           We'd love to hear from you.</p>
+      </div>
+
+      <form id="feedbackForm" novalidate aria-label="Feedback submission form">
+
+        <fieldset>
+          <legend>Personal Details</legend>
+
+          <div class="form-group">
+            <label for="fullName">Full Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="fullName" name="fullName"
+                   placeholder="Enter your full name" required>
+            <span class="error-msg" id="fullName-error" role="alert">Please enter your full name.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="emailAddr">Email Address <span aria-hidden="true">*</span></label>
+            <input type="email" id="emailAddr" name="emailAddr"
+                   placeholder="Enter your email address" required>
+            <span class="error-msg" id="emailAddr-error" role="alert">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="telNum">Telephone Number</label>
+            <input type="tel" id="telNum" name="telNum"
+                   placeholder="Enter your telephone number">
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3"
+                      placeholder="Your address (optional)"></textarea>
+          </div>
+        </fieldset>
+ 
+        <fieldset>
+          <legend>Feedback Details</legend>
+
+          <div class="form-group">
+            <label for="programme">Programme You Engaged With <span aria-hidden="true">*</span></label>
+            <select id="programme" name="programme" required>
+              <option value=""> Select a programme </option>
+              <option value="wateraid">WaterAid Community Water Access</option>
+              <option value="unicef">UNICEF WASH  Schools &amp; Communities</option>
+              <option value="unhcr">UNHCR Water in Refugee Settings</option>
+              <option value="who">WHO  Safe Drinking Water Initiative</option>
+              <option value="other">Other / General Feedback</option>
+            </select>
+            <span class="error-msg" id="programme-error" role="alert">Please select a programme.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="visitDate">Date of Engagement</label>
+            <input type="date" id="visitDate" name="visitDate">
+          </div>
+
+          <div class="form-group">
+            <label for="visitDateTime">Preferred Contact Date &amp; Time</label>
+            <input type="datetime-local" id="visitDateTime" name="visitDateTime">
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country / Region</label>
+            <input type="text" id="country" name="country"
+                   list="country-list" placeholder="Start typing a country...">
+            <datalist id="country-list">
+              <option value="United Kingdom">
+              <option value="Ethiopia">
+              <option value="Chad">
+              <option value="Somalia">
+              <option value="Kenya">
+              <option value="Tanzania">
+              <option value="South Sudan">
+              <option value="Bangladesh">
+              <option value="India">
+              <option value="Nigeria">
+              <option value="Other">
+            </datalist>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message / Feedback <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5"
+                      maxlength="500" required
+                      placeholder="Share your thoughts, experiences, or suggestions..."></textarea>
+            <p class="char-counter" id="charCounter" aria-live="polite">500 characters remaining</p>
+            <span class="error-msg" id="message-error" role="alert">Please enter your message (at least 10 characters).</span>
+          </div>
+
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+
+        <div class="confirm-msg" id="confirmMsg" role="status" aria-live="polite">
+          &#10003; Thank you for your feedback! We appreciate you taking the time to share your experience.
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+</main>
+ 
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis.
+         We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+     
+    <div class="footer-section">
+      <h3>Navigation</h3>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+    <div class="footer-section">
+      <h3>Student 3</h3>
+      <a href="pageEditor_ST3.html">Page Editor</a>
+      <a href="validation_ST3.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>[Ruchee Tuladhar] | [w2148853] | Student 3</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+ 
+<script>
+ 
+  const messageField = document.getElementById('message');
+  const charCounter  = document.getElementById('charCounter');
+  const maxChars     = 500;
+
+  messageField.addEventListener('input', function () {
+    const remaining = maxChars - this.value.length;
+    charCounter.textContent = remaining + ' characters remaining';
+    charCounter.classList.remove('warning', 'danger');
+    if (remaining <= 50)  charCounter.classList.add('danger');
+    else if (remaining <= 150) charCounter.classList.add('warning');
+  });
+ 
+  function showError(fieldId, errorId) {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById(errorId);
+    if (field)  field.classList.add('error');
+    if (error)  error.classList.add('visible');
+  }
+ 
+  function clearError(fieldId, errorId) {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById(errorId);
+    if (field)  field.classList.remove('error');
+    if (error)  error.classList.remove('visible');
+  }
+ 
+  document.getElementById('fullName').addEventListener('input',
+    () => clearError('fullName', 'fullName-error'));
+  document.getElementById('emailAddr').addEventListener('input',
+    () => clearError('emailAddr', 'emailAddr-error'));
+  document.getElementById('programme').addEventListener('change',
+    () => clearError('programme', 'programme-error'));
+  messageField.addEventListener('input',
+    () => clearError('message', 'message-error'));
+ 
+  document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let valid = true;
+ 
+    const name = document.getElementById('fullName').value.trim();
+    if (name === '') {
+      showError('fullName', 'fullName-error');
+      valid = false;
+    } else {
+      clearError('fullName', 'fullName-error');
+    }
+ 
+    const email = document.getElementById('emailAddr').value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      showError('emailAddr', 'emailAddr-error');
+      valid = false;
+    } else {
+      clearError('emailAddr', 'emailAddr-error');
+    }
+ 
+    const prog = document.getElementById('programme').value;
+    if (prog === '') {
+      showError('programme', 'programme-error');
+      valid = false;
+    } else {
+      clearError('programme', 'programme-error');
+    }
+ 
+    const msg = messageField.value.trim();
+    if (msg.length < 10) {
+      showError('message', 'message-error');
+      valid = false;
+    } else {
+      clearError('message', 'message-error');
+    }
+
+    if (valid) {
+      document.getElementById('confirmMsg').style.display = 'block';
+      this.reset();
+      charCounter.textContent = maxChars + ' characters remaining';
+      charCounter.classList.remove('warning', 'danger');
+      document.getElementById('confirmMsg').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+</script>
+
+</body>
+</html>

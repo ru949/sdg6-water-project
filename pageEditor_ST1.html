@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Page Editor | Student 1 | ProjectBlue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 15px;
+      color: #2c3e50;
+      background-color: #f4f6f8;
+      line-height: 1.75;
+    }
+    .editor-header {
+      background-color: #1b2e4d;
+      color: white;
+      padding: 32px 40px;
+      border-bottom: 4px solid #1a9fd4;
+    }
+
+    .editor-header h1 {
+      font-size: 1.7rem;
+      font-weight: 900;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .editor-header p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .editor-header .role-badge {
+      display: inline-block;
+      background-color: #1a9fd4;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+    }
+    .editor-layout {
+      display: flex;
+      max-width: 1200px;
+      margin: 36px auto;
+      padding: 0 24px;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    .editor-sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 24px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 20px;
+      border-top: 3px solid #1a9fd4;
+    }
+
+    .editor-sidebar .sidebar-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #8aaabf;
+      margin-bottom: 14px;
+    }
+
+    .editor-sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .editor-sidebar ul li {
+      margin-bottom: 4px;
+    }
+
+    .editor-sidebar ul li a {
+      display: block;
+      font-size: 0.84rem;
+      color: #4a637a;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+    }
+
+    .editor-sidebar ul li a:hover {
+      background-color: #eaf6fb;
+      color: #1a9fd4;
+      border-left-color: #1a9fd4;
+    }
+    .editor-main {
+      flex: 1;
+    }
+
+    .editor-section {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      scroll-margin-top: 24px;
+    }
+
+    .editor-section h2 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #1b2e4d;
+      margin-bottom: 6px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #eaf6fb;
+    }
+
+    .editor-section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #304674;
+      margin: 22px 0 8px;
+    }
+
+    .editor-section h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1a9fd4;
+      margin: 16px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .editor-section p {
+      font-size: 0.92rem;
+      color: #4a637a;
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .editor-section ul, .editor-section ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .editor-section ul li, .editor-section ol li {
+      font-size: 0.92rem;
+      color: #4a637a;
+      margin-bottom: 6px;
+      line-height: 1.7;
+    }
+    .tag {
+      display: inline-block;
+      background-color: #eaf6fb;
+      color: #1a3a5c;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      padding: 1px 7px;
+      border-radius: 4px;
+      border: 1px solid #d4edf7;
+    }
+    .page-link {
+      display: inline-block;
+      background-color: #1a9fd4;
+      color: white;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 4px;
+      margin-top: 10px;
+      margin-right: 8px;
+    }
+
+    .page-link:hover {
+      background-color: #304674;
+      color: white;
+    }
+
+    .page-link.outline {
+      background-color: transparent;
+      color: #1a9fd4;
+      border: 2px solid #1a9fd4;
+    }
+
+    .page-link.outline:hover {
+      background-color: #1a9fd4;
+      color: white;
+    }
+    .callout {
+      background-color: #eaf6fb;
+      border-left: 4px solid #1a9fd4;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 0.9rem;
+      color: #1a3a5c;
+    }
+
+    .meeting-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin-top: 16px;
+    }
+
+    .meeting-table th {
+      background-color: #1b2e4d;
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .meeting-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e8eef4;
+      color: #4a637a;
+      vertical-align: top;
+    }
+
+    .meeting-table tr:nth-child(even) td {
+      background-color: #f7fafc;
+    }
+
+    .meeting-table tr:hover td {
+      background-color: #eaf6fb;
+    }
+
+    .ref-list {
+      list-style: none;
+      padding: 0;
+      counter-reset: ref-counter;
+    }
+
+    .ref-list li {
+      counter-increment: ref-counter;
+      padding: 8px 0 8px 36px;
+      position: relative;
+      border-bottom: 1px solid #f0f4f8;
+      font-size: 0.88rem;
+      color: #4a637a;
+    }
+
+    .ref-list li::before {
+      content: "[" counter(ref-counter) "]";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #1a9fd4;
+      font-size: 0.8rem;
+    }
+
+    .ref-list li a {
+      color: #1a9fd4;
+      text-decoration: underline;
+    }
+    .go-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background-color: #1b2e4d;
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 44px;
+      font-size: 1.3rem;
+      text-decoration: none;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.1);
+      z-index: 900;
+    }
+
+    .go-top:hover {
+      background-color: #1a9fd4;
+      color: white;
+    }
+    @media (max-width: 860px) {
+      .editor-layout  { flex-direction: column; }
+      .editor-sidebar { width: 100%; position: static; }
+      .editor-section { padding: 22px 20px; }
+      .editor-header  { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+<nav>
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="ProjectBlue logo">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links" role="navigation" aria-label="Main navigation">
+      <li><a href="home.html" aria-current="page">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="ais.html">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="editor-header">
+  <h1>Page Editor &mdash; Swosti Tamrakar</h1>
+  <p><strong style="color:white;">Student 1</strong> &mdash; Student ID: w2148847</p>
+  <span class="role-badge">Role: Template &amp; Global CSS | Home Page | Gallery | Content Page (ST1)</span>
+</div>
+
+<div class="editor-layout">
+  <aside class="editor-sidebar" aria-label="Page Editor contents">
+    <p class="sidebar-label">Contents</p>
+    <ul>
+      <li><a href="#overview">1. Overview</a></li>
+      <li><a href="#pages">2. Pages Built</a></li>
+      <li><a href="#template">3. Template &amp; CSS</a></li>
+      <li><a href="#home">4. Home Page</a></li>
+      <li><a href="#gallery">5. Gallery Page</a></li>
+      <li><a href="#content">6. Content Page</a></li>
+      <li><a href="#challenges">7. Challenges</a></li>
+      <li><a href="#accessibility">8. Accessibility</a></li>
+      <li><a href="#janet">9. JANET Compliance</a></li>
+      <li><a href="#meetings">10. Group Meetings</a></li>
+      <li><a href="#references">11. References</a></li>
+    </ul>
+  </aside>
+
+  <main class="editor-main">
+    <section class="editor-section" id="overview">
+      <h2>1. Student Overview</h2>
+      <p>
+        My name is <strong>Swosti Tamrakar</strong> and I am a student on the Web Design and Development module (4COSC011W)
+        at the Westminster College. For this group coursework, I was assigned the role of <strong>Student 1</strong>,
+        which meant I was responsible for the shared website template, the global CSS, the Home Page, the Gallery Page, and my
+        own individual Content Page.
+      </p>
+      <p>
+        Our group chose <strong>SDG 6 — Clean Water and Sanitation</strong> as the focus for the website, with a specific
+        emphasis on the water crisis in Sub-Saharan Africa, particularly in Ethiopia, Chad, and Somalia. The website is called
+        <strong>ProjectBlue</strong>.
+      </p>
+      <div class="callout">
+        This Page Editor documents my individual contributions to the project, explains the technical decisions I made, reflects
+        on the challenges I faced, and records our group collaboration throughout the semester.
+      </div>
+    </section>
+
+    <section class="editor-section" id="pages">
+      <h2>2. Completed Pages &amp; Tasks</h2>
+      <p>The following pages and files were implemented by me as part of this coursework:</p>
+      <ul>
+        <li><strong>style.css</strong> — Global CSS stylesheet shared across all team members</li>
+        <li><strong>template.html</strong> — Shared HTML template distributed to all team members</li>
+        <li><strong>home.html</strong> — The website Home Page</li>
+        <li><strong>gallery.html</strong> — The Gallery Page</li>
+        <li><strong>content_ST1.html</strong> — My individual Content Page (The Scale of the Crisis)</li>
+        <li><strong>pageEditor_ST1.html</strong> — This Page Editor</li>
+        <li><strong>validation_ST1.html</strong> — My Validation Page</li>
+      </ul>
+
+      <h3>Live Page Links</h3>
+      <p>The following links open each of my implemented pages on the university server (opens in a new tab):</p>
+      <a href="home.html" target="_blank" class="page-link">Home Page</a>
+      <a href="gallery.html" target="_blank" class="page-link">Gallery</a>
+      <a href="content_ST1.html" target="_blank" class="page-link">Content Page</a>
+      <a href="validation_ST1.html" target="_blank" class="page-link outline">Validation Page</a>
+    </section>
+    <section class="editor-section" id="template">
+      <h2>3. Shared Template &amp; Global CSS</h2>
+      <p>
+        As Student 1, I was responsible for creating the shared HTML template and the global CSS file that all four team members
+        used across the entire website. This was one of the most important tasks in the project because any errors I made would
+        affect everyone's pages.
+      </p>
+
+      <h3>HTML Structure</h3>
+      <p>The shared template uses the following key HTML elements:</p>
+      <ul>
+        <li><span class="tag">&lt;header&gt;</span> — Contains the site logo and navigation bar</li>
+        <li><span class="tag">&lt;nav&gt;</span> — Wraps the navigation links list</li>
+        <li><span class="tag">&lt;ul&gt; / &lt;li&gt; / &lt;a&gt;</span> — Navigation links to all main pages</li>
+        <li><span class="tag">&lt;main&gt;</span> — Placeholder where each student adds their own page content</li>
+        <li><span class="tag">&lt;footer&gt;</span> — Contains the brand description, navigation column, team column, student bar with Page Editor and Validation links, and the copyright line</li>
+      </ul>
+
+      <h3>CSS Techniques</h3>
+      <p>
+        The global CSS file (<span class="tag">style.css</span>) defines the visual identity for the entire website. I used
+        CSS custom properties (variables) to define the colour palette once and reuse it everywhere. Key layout techniques include:
+      </p>
+      <ul>
+        <li><strong>Float-based layout</strong> — Used for the footer columns, card grids, and multi-column sections, keeping the code simple and compatible</li>
+        <li><strong>Overflow: hidden with clearfix</strong> — Applied after float containers to prevent layout collapse</li>
+        <li><strong>Position: sticky</strong> — Used on the header to keep navigation visible while scrolling</li>
+        <li><strong>CSS variables</strong> — Defined in <span class="tag">:root</span> so colours, fonts, and spacing are consistent and easy to update</li>
+        <li><strong>Box-shadow</strong> — Applied to cards for subtle depth without complex effects</li>
+        <li><strong>Media queries</strong> — Used at 860px and 560px breakpoints to make the site responsive on tablet and mobile</li>
+      </ul>
+
+      <h3>Design Rationale</h3>
+      <p>
+        I chose a deep navy (<span class="tag">#1b2e4d</span>) and ocean blue (<span class="tag">#1a9fd4</span>) colour palette
+        because it directly reflects the theme of water and reinforces the seriousness of the SDG 6 subject matter. The Lato
+        font was chosen for its clean, professional appearance and excellent readability at small sizes. I deliberately kept the
+        CSS techniques basic — using float layouts rather than CSS Grid or Flexbox — to ensure the code is understandable and
+        consistent with the level expected at this stage of the course.
+      </p>
+
+      <a href="validation_ST1.html#template-validation" class="page-link outline">See Template Validation Evidence</a>
+    </section>
+    <section class="editor-section" id="home">
+      <h2>4. Home Page (home.html)</h2>
+      <p>
+        The Home Page is the central entry point to the Project Blue website. It introduces the SDG 6 crisis, presents three
+        mission cards, displays a statistics bar, and provides an interactive gallery of tiles linking to all four student
+        content pages.
+      </p>
+
+      <h3>HTML Structure</h3>
+      <ul>
+        <li><span class="tag">&lt;section class="hero"&gt;</span> — Full-height opening section with background image and overlay</li>
+        <li><span class="tag">&lt;section class="stats-bar"&gt;</span> — Row of four key statistics about the water crisis</li>
+        <li><span class="tag">&lt;section class="mission-wrap"&gt;</span> — Three content cards using the shared <span class="tag">.card</span> class</li>
+        <li><span class="tag">&lt;article class="card"&gt;</span> — Semantic article elements for each mission card, each containing a heading, image, description, list, and button</li>
+        <li><span class="tag">&lt;section class="gallery-wrap"&gt;</span> — Interactive tiles using float layout, each linking to a student content page</li>
+        <li><span class="tag">&lt;div class="tile-info"&gt;</span> — Hidden overlay inside each tile that slides into view on hover</li>
+      </ul>
+
+      <h3>CSS Techniques</h3>
+      <ul>
+        <li><strong>Position: absolute</strong> — Used on the hero background image and colour overlay so they sit behind the text content</li>
+        <li><strong>Position: relative with z-index</strong> — Applied to the hero content so it appears on top of the background layers</li>
+        <li><strong>Opacity</strong> — The background image uses <span class="tag">opacity: 0.30</span> to keep it subtle and readable</li>
+        <li><strong>Float layout</strong> — The stats bar, card grid, and tile gallery all use <span class="tag">float: left</span> with percentage widths</li>
+        <li><strong>Hover with bottom positioning</strong> — The tile info overlay is positioned at <span class="tag">bottom: -60px</span> by default and moves to <span class="tag">bottom: 0</span> on hover, creating the slide-up reveal effect</li>
+        <li><strong>Overflow: hidden</strong> — Applied to tile containers so the info panel is hidden until hover</li>
+      </ul>
+
+      <h3>Design Rationale</h3>
+      <p>
+        The hero section opens with a strong emotional statement "Millions still have no access to safe, clean water"
+        paired with a real photograph of the crisis. This was a deliberate choice to immediately connect visitors with the
+        human reality of SDG 6 rather than leading with abstract statistics. The three mission cards each contain a list
+        of three points as required by the brief, covering the crisis, community impact, and hopeful outcomes. The interactive
+        gallery tiles at the bottom use a hover slide-up effect to make the page feel engaging without relying on JavaScript.
+      </p>
+
+      <a href="home.html" target="_blank" class="page-link">View Home Page</a>
+      <a href="validation_ST1.html#home-validation" class="page-link outline">See Home Validation</a>
+    </section>
+    <section class="editor-section" id="gallery">
+      <h2>5. Gallery Page (gallery.html)</h2>
+      <p>
+        The Gallery Page presents six photographs related to the water crisis in Sub-Saharan Africa. Users can click any
+        thumbnail to expand it into a modal view with a full description and customisation controls.
+      </p>
+
+      <h3>HTML Structure</h3>
+      <ul>
+        <li><span class="tag">&lt;div class="thumb-grid"&gt;</span> — Float-based 3-column grid of thumbnail cards</li>
+        <li><span class="tag">&lt;div class="thumb-card"&gt;</span> — Each card has a tabindex for keyboard access, a data-id attribute for JavaScript, an image, a title, and a short label</li>
+        <li><span class="tag">&lt;div class="modal-overlay"&gt;</span> — The full-screen modal container, hidden by default, shown by JavaScript</li>
+        <li><span class="tag">&lt;div class="modal-body"&gt;</span> — Inside the modal: the image, title, description, and the colour/font customisation controls</li>
+        <li><span class="tag">&lt;select&gt;</span> — Two dropdown menus for colour scheme and font style, both JavaScript-driven</li>
+      </ul>
+
+      <h3>JavaScript Implementation</h3>
+      <p>
+        The gallery uses JavaScript throughout, as required by the brief. The key interactions are:
+      </p>
+
+      <h3>Hover Interaction</h3>
+      <p>
+        Each thumbnail card has a <span class="tag">mouseover</span> and <span class="tag">mouseout</span> event listener
+        attached via JavaScript. When the user hovers over a card, JavaScript adds the class <span class="tag">hovered</span>
+        to it. CSS then uses that class to show the expand badge and lift the card. This satisfies the brief's requirement
+        that hover interaction logic must be handled by JavaScript event listeners, not CSS alone.
+      </p>
+
+      <h3>Click-to-Expand Modal</h3>
+      <p>
+        When a card is clicked, the <span class="tag">openModal(id)</span> function runs. It looks up the card's
+        <span class="tag">data-id</span> attribute, retrieves the matching entry from the <span class="tag">items</span>
+        object (which stores each image's source, alt text, title, and description), and populates the modal with that data
+        using <span class="tag">textContent</span> and <span class="tag">src</span> assignments. The modal overlay then becomes
+        visible by adding the <span class="tag">open</span> class, which switches its display from <span class="tag">none</span>
+        to <span class="tag">block</span>. Focus is moved to the close button for accessibility.
+      </p>
+
+      <h3>Close Interaction</h3>
+      <p>
+        The modal can be closed in three ways, all implemented in JavaScript: clicking the close button, clicking anywhere
+        outside the modal box (detected by checking if <span class="tag">e.target === overlay</span>), or pressing the
+        Escape key (detected via a <span class="tag">keydown</span> event listener on the document).
+      </p>
+
+      <h3>Colour and Font Customisation</h3>
+      <p>
+        Inside the modal, two dropdown menus allow the user to change the colour scheme and font style of the expanded view.
+        A <span class="tag">colours</span> object stores background, text, and heading colours for four themes (Default, Ocean,
+        Midnight, Warm Sand). A <span class="tag">fonts</span> object stores font stacks for Lato, Serif, and Monospace.
+        The <span class="tag">applyStyle()</span> function reads the current dropdown values and applies the corresponding
+        styles directly to the modal content element. These customisations apply only to the modal content the rest of the
+        page is unaffected.
+      </p>
+
+      <a href="gallery.html" target="_blank" class="page-link">View Gallery Page</a>
+      <a href="validation_ST1.html#gallery-validation" class="page-link outline">See Gallery Validation</a>
+    </section>
+    <section class="editor-section" id="content">
+      <h2>6. Content Page (content_ST1.html)</h2>
+      <p>
+        My individual content page is titled <em>The Scale of the Crisis</em>. It provides an in-depth, data-driven
+        look at the global water crisis, focusing specifically on Sub-Saharan Africa. The page is divided into six
+        sections with internal navigation.
+      </p>
+
+      <h3>HTML Structure</h3>
+      <ul>
+        <li><span class="tag">&lt;aside class="side-nav"&gt;</span> — A sticky side navigation panel with anchor links to each section</li>
+        <li><span class="tag">&lt;article class="article"&gt;</span> — The main content area floated to the right of the sidebar</li>
+        <li><span class="tag">&lt;section id="overview"&gt;</span> through <span class="tag">&lt;section id="action"&gt;</span> — Six clearly defined content sections</li>
+        <li><span class="tag">&lt;h1&gt;</span> — Single page title in the banner</li>
+        <li><span class="tag">&lt;h2&gt;</span> — Section headings, one per section</li>
+        <li><span class="tag">&lt;h3&gt;</span> — Sub-headings within sections (e.g. Climate Change, Conflict and Governance)</li>
+        <li><span class="tag">&lt;blockquote class="pull-quote"&gt;</span> — A styled quotation block</li>
+        <li><span class="tag">&lt;div class="stat-row"&gt;</span> — Rows of dark stat boxes showing key numbers</li>
+        <li><span class="tag">&lt;a href="#top" class="go-top"&gt;</span> — A CSS-only fixed Go to Top button</li>
+      </ul>
+
+      <h3>CSS Techniques</h3>
+      <ul>
+        <li><strong>Float layout for two columns</strong> — The side nav floats left at 200px width, and the article uses <span class="tag">margin-left: 240px</span> to sit beside it</li>
+        <li><strong>Position: sticky</strong> — The sidebar stays visible as the user scrolls through long sections</li>
+        <li><strong>Position: fixed</strong> — The Go to Top button stays in the bottom-right corner at all times, implemented in CSS only with no JavaScript</li>
+        <li><strong>Box-shadow and border-radius</strong> — Applied to images to give them a polished, professional appearance</li>
+        <li><strong>Float image pairs</strong> — Two images side by side using <span class="tag">float: left</span> at 47% width each</li>
+        <li><strong>Scroll-margin-top</strong> — Applied to each section so anchor links account for the sticky header height</li>
+      </ul>
+
+      <h3>Design Rationale</h3>
+      <p>
+        The content page is deliberately long and information-dense because it is meant to function as a genuine educational
+        resource about the water crisis. The sticky sidebar navigation makes it easy to jump between sections without
+        excessive scrolling. The dark stat boxes create visual contrast that draws the eye to the most important numbers.
+        Images are used to break up the text and provide emotional context for the statistics.
+      </p>
+
+      <a href="content_ST1.html" target="_blank" class="page-link">View Content Page</a>
+      <a href="validation_ST1.html#content-validation"  class="page-link outline">See Content Validation</a>
+    </section>
+    <section class="editor-section" id="challenges">
+      <h2>7. Challenges &amp; Lessons Learned</h2>
+
+      <h3>Challenge 1 — JavaScript and the Hover Interaction</h3>
+      <p>
+        One of the most difficult parts of this project was understanding that the brief required hover interaction logic
+        to be handled by JavaScript, not CSS alone. My first instinct was to use the CSS <span class="tag">:hover</span>
+        pseudo-class to show and hide elements which is simpler and works visually. However, re-reading section 4.3 of
+        the brief made it clear that the interaction logic itself had to use JavaScript event listeners.
+      </p>
+      <p>
+        I resolved this by attaching <span class="tag">mouseover</span> and <span class="tag">mouseout</span> event
+        listeners to each thumbnail card. These listeners add and remove a <span class="tag">.hovered</span> CSS class,
+        which then triggers the visual change. This approach separates the logic (JavaScript) from the presentation (CSS)
+        in the way the brief intended.
+      </p>
+      <p>
+        What I learned: reading the brief carefully word by word is essential. What seems like a small CSS-only solution
+        can miss a specific requirement entirely.
+      </p>
+
+      <h3>Challenge 2 — The Hover Slide-Up Effect on the Home Page Tiles</h3>
+      <p>
+        On the Home Page, the content gallery tiles need to reveal additional information when the user hovers over them.
+        I wanted the info overlay to slide up from below the image, but achieving this in a clean way without using
+        <span class="tag">transform: translateY()</span> (which I wanted to keep simple) required a different approach.
+      </p>
+      <p>
+        The solution I used was to position the info panel at <span class="tag">bottom: -60px</span> by default,
+        placing it just out of view below the tile. The tile itself has <span class="tag">overflow: hidden</span>,
+        so the panel is invisible until hover. On hover, CSS changes the position to <span class="tag">bottom: 0</span>,
+        and a <span class="tag">transition</span> on the bottom property creates the smooth slide-up effect. This is
+        a basic CSS positioning technique but produces a polished result.
+      </p>
+      <p>
+        What I learned: you do not always need advanced CSS properties to create good interactive effects. Understanding
+        how position and overflow work together can achieve the same results with simpler code.
+      </p>
+
+      <h3>Challenge 3 — The Gallery Modal and JavaScript Data Population</h3>
+      <p>
+        Building the gallery modal was the most complex JavaScript task I had to complete. The challenge was making one
+        single modal work correctly for six different images each needing a different image source, alt text, title,
+        and description without duplicating the modal six times in the HTML.
+      </p>
+      <p>
+        I solved this by storing all the image data in a JavaScript object called <span class="tag">items</span>, where
+        each key is a card ID matching the <span class="tag">data-id</span> attribute on the HTML card. When a card is
+        clicked, JavaScript reads the card's data-id, looks it up in the items object, and uses the result to populate
+        the modal. This is a clean, scalable approach adding a seventh image only requires adding one more entry to
+        the object.
+      </p>
+      <p>
+        What I learned: JavaScript objects are a very useful way to store and retrieve structured data. Understanding this
+        pattern made the gallery much easier to build and maintain.
+      </p>
+
+      <h3>Challenge 4 — Colour and Font Customisation in the Modal</h3>
+      <p>
+        The brief requires that the gallery modal includes controls for changing the colour scheme and font style, and
+        that these changes apply only to the modal content not to the rest of the page. I initially found this confusing
+        because I was not sure how to apply styles dynamically without affecting global styles.
+      </p>
+      <p>
+        The solution was to apply the style changes directly to the modal content element using
+        <span class="tag">element.style.backgroundColor</span>, <span class="tag">element.style.color</span>, and
+        <span class="tag">element.style.fontFamily</span>. Because these are inline styles on a specific element,
+        they do not affect anything outside of it. The <span class="tag">applyStyle()</span> function reads both
+        dropdowns and applies the matching values from the colour and font objects in one call.
+      </p>
+      <p>
+        What I learned: applying styles directly through JavaScript's style property is a simple and reliable way to
+        change the appearance of a specific element without touching the stylesheet.
+      </p>
+    </section>
+
+    <section class="editor-section" id="accessibility">
+      <h2>8. Accessibility Considerations</h2>
+      <p>
+        Accessibility was considered throughout the development of all my pages. The following specific techniques
+        were applied:
+      </p>
+
+      <h3>Semantic HTML</h3>
+      <p>
+        All pages use correct semantic HTML elements throughout. The <span class="tag">&lt;header&gt;</span>,
+        <span class="tag">&lt;main&gt;</span>, <span class="tag">&lt;footer&gt;</span>, <span class="tag">&lt;nav&gt;</span>,
+        <span class="tag">&lt;article&gt;</span>, <span class="tag">&lt;section&gt;</span>, and
+        <span class="tag">&lt;aside&gt;</span> elements are used for their correct purposes. This means screen readers
+        can identify the structure of the page and allow users to navigate between regions without relying on visual cues.
+      </p>
+
+      <h3>Alternative Text on All Images</h3>
+      <p>
+        Every image across all three of my pages has a descriptive <span class="tag">alt</span> attribute. For decorative
+        background elements (the hero background image and overlay), <span class="tag">role="presentation"</span> is applied
+        so screen readers skip them entirely. For meaningful images, the alt text describes what is shown and why it is relevant
+        to the page content.
+      </p>
+
+      <h3>Keyboard Navigation</h3>
+      <p>
+        The gallery thumbnail cards are fully keyboard accessible. Each card has <span class="tag">tabindex="0"</span>
+        which adds it to the tab order. Keyboard users can press <span class="tag">Enter</span> or
+        <span class="tag">Space</span> to open the modal, and <span class="tag">Escape</span> to close it. Focus is moved
+        to the close button when the modal opens so keyboard users do not lose their place.
+      </p>
+
+      <h3>ARIA Attributes</h3>
+      <p>
+        The navigation has <span class="tag">aria-label="Main navigation"</span> to identify it to screen readers.
+        The modal uses <span class="tag">role="dialog"</span>, <span class="tag">aria-modal="true"</span>,
+        <span class="tag">aria-labelledby</span>, and <span class="tag">aria-hidden="true/false"</span> which is toggled
+        by JavaScript when the modal opens and closes. The active nav link has <span class="tag">aria-current="page"</span>.
+        Gallery cards have descriptive <span class="tag">aria-label</span> attributes explaining what they contain.
+      </p>
+
+      <h3>Heading Hierarchy</h3>
+      <p>
+        All pages follow a logical heading hierarchy. Each page has exactly one <span class="tag">&lt;h1&gt;</span> for
+        the page title, followed by <span class="tag">&lt;h2&gt;</span> for main sections, and
+        <span class="tag">&lt;h3&gt;</span> for sub-sections. This structure is important for screen reader users who
+        navigate by heading.
+      </p>
+
+      <h3>Colour Contrast</h3>
+      <p>
+        The colour palette was chosen to ensure sufficient contrast between text and background throughout the site. White
+        text on the dark navy background and dark text on the light surface background both meet readability standards.
+        Interactive elements such as buttons and links have visible hover states to confirm interactivity.
+      </p>
+
+      <h3>Why These Choices Improve Usability</h3>
+      <p>
+        These accessibility features ensure the website is usable by people with visual impairments using screen readers,
+        people who cannot use a mouse and rely on keyboard navigation, and people using assistive technologies of any kind.
+        Accessible design also benefits all users clear structure, readable text, and logical navigation improve the
+        experience for everyone regardless of ability.
+      </p>
+    </section>
+    <section class="editor-section" id="janet">
+      <h2>9. JANET Compliance</h2>
+      <p>
+        All pages I have created comply with JANET regulations, which govern the responsible publication of web content
+        on the UK academic network. The following explains how compliance was achieved across my work:
+      </p>
+
+      <h3>Appropriate and Ethical Content</h3>
+      <p>
+        All written content on my pages is original, factual, and directly related to the United Nations Sustainable
+        Development Goal 6 — Clean Water and Sanitation. No content promotes hatred, violence, discrimination, or any
+        activity that would be considered inappropriate for an academic publication. The tone throughout is informative,
+        serious, and respectful of the communities depicted.
+      </p>
+
+      <h3>Responsible Use of External Resources</h3>
+      <p>
+        All images used on my pages are either provided by the team from appropriate sources or used with proper attribution.
+        External resources, including the Google Fonts API for the Lato typeface, are referenced correctly using standard
+        link elements. No copyrighted material has been reproduced without proper acknowledgement. All image
+        <span class="tag">alt</span> attributes include clear descriptions that also serve as informal attribution of
+        the depicted subjects and regions.
+      </p>
+
+      <h3>No Unlawful Activity</h3>
+      <p>
+        None of the pages I created contain links to, or promotion of, any unlawful activity. All external links point
+        to legitimate, publicly available web resources. The website does not collect personal data, and no server-side
+        processing is involved, all interaction is handled client-side in the browser.
+      </p>
+
+      <h3>Academic Integrity</h3>
+      <p>
+        All code in my pages was written by me. I have not copied code from other students or from pre-built website
+        templates. Where techniques were learned from lecture notes or online tutorials, these are referenced in the
+        References section of this Page Editor. The content of the website is original and was not reproduced from the
+        United Nations SDG website or any other source.
+      </p>
+
+      <h3>Professional Conduct</h3>
+      <p>
+        The website presents a professional and appropriate image consistent with the University of Westminster's
+        expectations. The subject matter <strong>global water crisis</strong>is treated with the seriousness and sensitivity
+        it deserves. No content could be considered offensive, misleading, or inappropriate for an academic audience.
+      </p>
+    </section>
+
+    <section class="editor-section" id="meetings">
+      <h2>10. Group Meetings &amp; Contribution Log</h2>
+      <p>
+        The following table records a minimum of six group meetings held over the course of the semester. Each entry
+        reflects my individual account of the meeting, including my personal contribution.
+      </p>
+
+      <table class="meeting-table" aria-label="Group meetings log">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date &amp; Time</th>
+            <th>Format</th>
+            <th>Objective</th>
+            <th>Attended</th>
+            <th>My Individual Contribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>27<sup>th</sup>March, 2026<br></td>
+            <td>Face-to-face</td>
+            <td>Agree SDG topic and assign student roles</td>
+            <td>Yes</td>
+            <td>I proposed SDG 6 (Clean Water) as our topic and suggested the name ProjectBlue. I agreed to take on the role of Student 1, responsible for the shared template, global CSS, Home Page, and Gallery.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>28<sup>th</sup>March, 2026</td>
+            <td>Online</td>
+            <td>Review and share the HTML template and global CSS with the team</td>
+            <td>Yes</td>
+            <td>I shared the completed style.css and template.html files with the team. I walked everyone through the folder structure, file naming conventions, and which parts of the template must not be modified.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>29<sup>th</sup>March, 2026</td>
+            <td>Online</td>
+            <td>First draft, Progress and overall visual identity</td>
+            <td>Yes</td>
+            <td>I finalised all remaining pages and ensured consistency across the site using the global CSS file established in the previous session. I reviewed the navy and ocean blue colour scheme and Lato font across all components for uniformity</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>30<sup>th</sup>March, 2026</td>
+            <td>Face-to-face</td>
+            <td>Reviwing the ccontent and decision making on details</td>
+            <td>Yes</td>
+            <td>I shared that my topic would be "The scale of crisis" shared the images with team and worked based on their opinion.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>31<sup>th</sup>March, 2026</td>
+            <td>Hybrid</td>
+            <td>Review Gallery JavaScript and resolve any cross-page navigation.</td>
+            <td>Yes</td>
+            <td>I demonstrated the gallery modal functionality including the colour and font customisation controls. I also checked that navigation links worked correctly from all team members' pages and fixed two broken link references.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>1<sup>st</sup>April, 2026</td>
+            <td>Online</td>
+            <td>Final review before submission and validation of all pages</td>
+            <td>Yes</td>
+            <td>I ran all three of my pages through the W3C HTML validator and fixed the errors found and confirmed the URLs were working. I shared the final criterias with the group.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section class="editor-section" id="references">
+      <h2>11. References</h2>
+      <p>
+        The following resources were consulted during the development of my pages. In-text references are marked
+        throughout this Page Editor where relevant.
+      </p>
+
+      <ol class="ref-list">
+        <li>
+          University of Westminster (2026). <em>4COSC011W Web Design and Development — Coursework Specification 2025/26.</em>
+          Provided via Blackboard. [Lecture material]
+        </li>
+        <li>
+          W3Schools (2024). <em>HTML Tutorial.</em> Available at:
+          <a href="https://www.w3schools.com/html/" target="_blank">https://www.w3schools.com/html/</a>
+          [Accessed: March 2026]
+        </li>
+        <li>
+          W3Schools (2024). <em>CSS Tutorial.</em> Available at:
+          <a href="https://www.w3schools.com/css/" target="_blank">https://www.w3schools.com/css/</a>
+          [Accessed: March 2026]
+        </li>
+        <li>
+          W3Schools (2024). <em>JavaScript Tutorial.</em> Available at:
+          <a href="https://www.w3schools.com/js/" target="_blank">https://www.w3schools.com/js/</a>
+          [Accessed: March 2026]
+        </li>
+        <li>
+          Mozilla Developer Network (2024). <em>MDN Web Docs — HTML, CSS, and JavaScript Reference.</em> Available at:
+          <a href="https://developer.mozilla.org/" target="_blank">https://developer.mozilla.org/</a>
+          [Accessed: March 2026]
+        </li>
+        <li>
+          World Health Organization (2023). <em>Drinking-water Fact Sheet.</em> Available at:
+          <a href="https://www.who.int/news-room/fact-sheets/detail/drinking-water" target="_blank">https://www.who.int/news-room/fact-sheets/detail/drinking-water</a>
+          [Accessed: February 2026]
+        </li>
+        <li>
+          United Nations (2024). <em>Sustainable Development Goal 6 — Clean Water and Sanitation.</em> Available at:
+          <a href="https://sdgs.un.org/goals/goal6" target="_blank">https://sdgs.un.org/goals/goal6</a>
+          [Accessed: February 2026]
+        </li>
+        <li>
+          Google Fonts (2024). <em>Lato Font Family.</em> Available at:
+          <a href="https://fonts.google.com/specimen/Lato" target="_blank">https://fonts.google.com/specimen/Lato</a>
+          [Accessed: February 2026]
+        </li>
+        <li>
+          W3C (2024). <em>Markup Validation Service.</em> Available at:
+          <a href="https://validator.w3.org/" target="_blank">https://validator.w3.org/</a>
+          [Accessed: March 2026]
+        </li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+<a href="#top" class="go-top" aria-label="Back to top" title="Back to top">&#8679;</a>
+<footer>
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Team</h4>
+      <a href="pageEditor_ST1.html">Page Editor</a>
+      <a href="validation_ST1.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>Swosti Tamrakar | w2148847 | Student 1</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+
+</body>
+</html>

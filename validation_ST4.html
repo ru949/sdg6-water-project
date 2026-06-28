@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>Validation Page | Student 4 | ProjectBlue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="ProjectBlue logo">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <ul class="nav-links" role="navigation" aria-label="Main navigation">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="ais.html">AIS</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sitemap.html">Sitemap</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="val-header">
+    <h1>Validation Page &mdash; Prabhakar Khatri</h1>
+    <p><strong style="color:white;">Student 4</strong> | Student ID: w2152989</p>
+    <span class="badge">W3C HTML Validation Evidence | 4COSC011W Web Design &amp; Development</span>
+  </div>
+
+  <div class="val-layout">
+
+    <aside class="val-sidebar" aria-label="Validation page contents">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#profileVal">1. User Profile</a></li>
+        <li><a href="#sitemapVal">2. Sitemap</a></li>
+        <li><a href="#contentVal">3. Content Page</a></li>
+        <li><a href="#reflection">Reflection</a></li>
+      </ul>
+    </aside>
+
+    <main class="val-main">
+
+      <section class="val-section" id="intro">
+        <h2>Introduction</h2>
+        <p>
+          This page provides evidence that all web pages I personally implemented for the ProjectBlue website
+          have been validated using the W3C Markup Validation Service. Validation confirms that the HTML in each
+          page follows web standards and contains no errors.
+        </p>
+        <p>
+          The pages validated on this page are the three pages I was responsible for building as Student 4:
+        </p>
+        <ul style="padding-left:20px; margin-bottom:14px;">
+          <li style="font-size:0.92rem; color:#4a637a; margin-bottom:6px;"><strong>profile.html</strong> &mdash; The User Profile Page</li>
+          <li style="font-size:0.92rem; color:#4a637a; margin-bottom:6px;"><strong>sitemap.html</strong> &mdash; The Sitemap Page</li>
+          <li style="font-size:0.92rem; color:#4a637a; margin-bottom:6px;"><strong>content_ST4.html</strong> &mdash; My individual Content Page</li>
+        </ul>
+        <p>
+          The Page Editor and this Validation Page are excluded from validation as specified in the coursework brief.
+        </p>
+        <div class="callout">
+          All validation was carried out using the W3C Markup Validation Service at
+          <a href="https://validator.w3.org/" target="_blank">https://validator.w3.org/</a>
+          using the &ldquo;Validate by Direct Input&rdquo; method.
+        </div>
+      </section>
+
+      <section class="val-section" id="profileVal">
+        <h2>1. User Profile Page &mdash; profile.html</h2>
+
+        <p>
+          The User Profile page collects personal information via JavaScript <code>prompt()</code> calls and
+          dynamically renders the results into the DOM using <code>document.createElement</code> and
+          <code>appendChild()</code>.
+        </p>
+
+        <a href="profile.html" target="_blank" class="page-link">View Live Page</a>
+        <a href="pageEditor_ST4.html#profile" class="page-link outline">Page Editor Section</a>
+
+        <h3>Validation Screenshot</h3>
+
+        <img src="validationSnapshots/profile_ST4_validation.png"
+          alt="W3C validation result for profile.html showing no errors"
+          style="width:100%; border-radius:8px; border:1px solid #d4edf7;">
+
+        <p>
+          <strong>Result:</strong> Initially flagged warnings due to empty <code>&lt;span&gt;</code> elements.
+          Fixed by adding placeholder text. Page now passes with no errors or warnings.
+        </p>
+      </section>
+
+      <section class="val-section" id="sitemapVal">
+        <h2>2. Sitemap Page &mdash; sitemap.html</h2>
+
+        <p>
+          The Sitemap page uses a fully SVG-based tree diagram with <code>&lt;rect&gt;</code>,
+          <code>&lt;path&gt;</code>, and <code>&lt;circle&gt;</code> elements linked via standard
+          <code>href</code> attributes to all major pages on the site.
+        </p>
+
+        <a href="sitemap.html" target="_blank" class="page-link">View Live Page</a>
+        <a href="pageEditor_ST4.html#sitemap" class="page-link outline">Page Editor Section</a>
+
+        <h3>Validation Screenshot</h3>
+        <img src="validationSnapshots/sitemap_ST4_validation.png"
+          alt="W3C validation result for sitemap.html showing no errors"
+          style="width:100%; border-radius:8px; border:1px solid #d4edf7;">
+
+        <p>
+          <strong>Result:</strong> Initially flagged deprecated <code>xlink:href</code> usage in SVG.
+          Fixed by replacing all instances with HTML5 <code>href</code>. Page now passes with no errors.
+        </p>
+      </section>
+
+      <section class="val-section" id="contentVal">
+        <h2>3. Content Page &mdash; content_ST4.html</h2>
+
+        <p>
+          The Content Page uses a responsive CSS grid layout to present information on Water Ecosystems,
+          with nested <code>&lt;section&gt;</code> elements and structural heading tags throughout.
+        </p>
+
+        <a href="content_ST4.html" target="_blank" class="page-link">View Live Page</a>
+        <a href="pageEditor_ST4.html#content" class="page-link outline">Page Editor Section</a>
+
+        <h3>Validation Screenshot</h3>
+        <img src="validationSnapshots/content_ST4_validation.png"
+          alt="W3C validation result for content_ST4.html showing no errors"
+          style="width:100%; border-radius:8px; border:1px solid #d4edf7;">
+
+        <p>
+          <strong>Result:</strong> Initially flagged structural depth warnings about nested sections missing
+          headings. Fixed by reorganising grid and heading hierarchy. Page now passes with no errors.
+        </p>
+      </section>
+
+      <section class="val-section" id="reflection">
+        <h2>Reflection on Validation</h2>
+
+        <h3>Errors Encountered</h3>
+        <p>
+          Across all three pages, the validator flagged different issues before the final screenshots were taken.<br><br>
+          On profile.html, the validator flagged empty <code>&lt;span&gt;</code> elements that were waiting
+          to be populated by JavaScript, causing accessibility warnings for screen readers.<br><br>
+          On sitemap.html, the deprecated <code>xlink:href</code> attribute used in the SVG nodes was flagged
+          immediately as it is no longer valid in HTML5.<br><br>
+          On content_ST4.html, nested <code>&lt;section&gt;</code> elements without dedicated headings triggered
+          structural depth warnings about the document outline.
+        </p>
+
+        <h3>How They Were Resolved</h3>
+        <p>
+          On profile.html, I added default placeholder text of <code>"..."</code> inside the empty
+          <code>&lt;span&gt;</code> elements so the validator and screen readers see valid content
+          even before JavaScript runs.<br><br>
+          On sitemap.html, I replaced every instance of <code>xlink:href</code> with the HTML5-standard
+          <code>href</code> attribute, which is fully supported in modern SVG.<br><br>
+          On content_ST4.html, I restructured the grid markup to ensure every <code>&lt;section&gt;</code>
+          had an appropriate heading, resolving all outline warnings.
+        </p>
+
+        <h3>What I Learned</h3>
+        <p>
+          Running my pages through the W3C validator taught me to think about how the browser and assistive
+          technologies interpret my markup before scripts run. Empty nodes and deprecated attributes are easy
+          to overlook when writing code but cause real accessibility problems. I will validate earlier in the
+          development process on future projects rather than leaving it to the end.
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <a href="#top" class="go-top" aria-label="Back to top" title="Back to top">&#8679;</a>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="home.html" class="logo">
+          <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+          <span class="logo-text">ProjectBlue</span>
+        </a>
+        <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">AIS</a>
+        <a href="profile.html">Profile</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Student 4</h4>
+        <a href="pageEditor_ST4.html">Page Editor</a>
+        <a href="validation_ST4.html">Validation</a>
+        <a href="content_ST4.html">Content Page</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+      <div>Prabhakar Khatri | w2152989 | Student 4</div>
+      <div>Web Design &amp; Development</div>
+    </div>
+  </footer>
+</body>
+
+</html>

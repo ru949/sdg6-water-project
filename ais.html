@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Impact Simulator – ProjectBlue</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- AIS PAGE – Embedded CSS (ais.html only)
+       Min. 5 rules, all commented.
+       Does NOT override global styles. -->
+  <style>
+
+    /* 1. AIS HERO – dark page header unique to this page */
+    .ais-hero {
+      background-color: #0a1628;
+      padding: 80px 28px 60px;
+      text-align: center;
+      border-bottom: 1px solid rgba(94,196,240,0.15);
+    }
+
+    .ais-hero .page-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      border: 1px solid rgba(94,196,240,0.30);
+      padding: 5px 16px;
+      margin-bottom: 22px;
+    }
+
+    .ais-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .ais-hero h1 em {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .ais-hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.60);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* 2. ACTION CARDS SECTION – light background, contrasts dark header */
+    .ais-cards-section {
+      background-color: #f2f8fd;
+      padding: 64px 28px 48px;
+    }
+
+    .ais-cards-section .section-title h2 {
+      color: #0c1c2e;
+    }
+
+    .ais-cards-section .section-title p {
+      color: #4a6378;
+    }
+
+    /* 3. ACTION CARD GRID – 3 columns using float */
+    .action-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    /* Individual action card */
+    .action-card {
+      float: left;
+      width: calc(33.333% - 18px);
+      margin: 0 27px 28px 0;
+      background: #ffffff;
+      border: 2px solid #dde8f0;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+      position: relative;
+    }
+
+    /* Every third card – remove right margin */
+    .action-card:nth-child(3n) { margin-right: 0; }
+
+    /* 4. SELECTED STATE – card turns highlighted when chosen */
+    .action-card.selected {
+      border-color: #1a6fa4;
+      box-shadow: 0 0 0 3px rgba(26,111,164,0.18);
+    }
+
+    .action-card.selected .card-select-bar {
+      background-color: #1a6fa4;
+    }
+
+    /* Hover state – subtle lift */
+    .action-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(12,28,46,0.10);
+    }
+
+    /* Thin coloured bar at top of each card, fills on select */
+    .card-select-bar {
+      height: 4px;
+      background-color: #dde8f0;
+      transition: background-color 0.25s;
+    }
+
+    /* Card thumbnail image */
+    .action-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Card text body */
+    .action-card-body {
+      padding: 18px 18px 14px;
+    }
+
+    .action-card-body h3 {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #0c1c2e;
+      margin-bottom: 7px;
+    }
+
+    .action-card-body p {
+      font-size: 0.78rem;
+      color: #4a6378;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    /* Impact points badge */
+    .impact-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #1a6fa4;
+      background-color: #e3f2fb;
+      padding: 4px 10px;
+    }
+
+    /* Tick icon – appears when selected */
+    .card-tick {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 22px;
+      height: 22px;
+      background-color: #1a6fa4;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .action-card.selected .card-tick { display: flex; }
+
+    /* 5. FEEDBACK / RESULTS SECTION – dark, full-width */
+    .ais-results {
+      background-color: #0f1e33;
+      padding: 56px 28px;
+      text-align: center;
+      /* Background image changes via JS based on impact level */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      transition: background-image 0.6s ease;
+    }
+
+    /* Overlay to keep text readable over background images */
+    .results-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(8,18,32,0.78);
+      z-index: 0;
+    }
+
+    .results-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .results-inner h2 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    /* Impact level label */
+    .impact-level-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    /* Score number */
+    .score-display {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    /* Summary message paragraph */
+    .impact-message {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      min-height: 60px;
+    }
+
+    /* Stat line – selected actions count */
+    .results-stats {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.40);
+      margin-bottom: 28px;
+    }
+
+    /* Reset button */
+    .btn-reset {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 11px 30px;
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+    }
+
+    .btn-reset:hover {
+      border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    /* Responsive – stack cards to 1 column on small screens */
+    @media (max-width: 860px) {
+      .action-card { width: calc(50% - 14px); margin-right: 28px; }
+      .action-card:nth-child(3n) { margin-right: 28px; }
+      .action-card:nth-child(2n) { margin-right: 0; }
+      .ais-hero h1 { font-size: 1.8rem; }
+    }
+
+    @media (max-width: 560px) {
+      .action-card { width: 100%; margin-right: 0; }
+      .ais-hero h1 { font-size: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER – copied from shared template (Student 1).
+     Only change: class="active" moved to AIS link. -->
+<header>
+  <nav>
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="ProjectBlue logo">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links" role="navigation" aria-label="Main navigation">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="ais.html" class="active" aria-current="page">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- PAGE HERO -->
+  <section class="ais-hero" aria-label="Action Impact Simulator introduction">
+    <span class="page-tag">SDG 6 – Take Action</span>
+    <h1>What will <em>you</em> do<br>for clean water?</h1>
+    <p>
+      Select the actions you are willing to take. Every choice adds up.
+      See your total impact score and discover the difference you can make.
+    </p>
+  </section>
+
+  <!-- ACTION CARDS SECTION -->
+  <section class="ais-cards-section" aria-label="Action selection cards">
+    <div class="container">
+      <div class="section-title">
+        <h2>Pick Your Actions</h2>
+        <p>There are no wrong answers — it is about exploring what is realistic for you.</p>
+      </div>
+    </div>
+
+    <div class="action-grid" role="list" aria-label="List of available actions">
+
+      <!-- CARD 1 – Reduce water waste at home (3 pts) -->
+      <article class="action-card" role="listitem"
+               data-points="3"
+               aria-label="Action: Fix leaks and reduce water waste at home. Impact: 3 points."
+               tabindex="0">
+        <div class="card-select-bar"></div>
+        <div class="card-tick" aria-hidden="true">&#10003;</div>
+        <!-- Replace with your own royalty-free image; suggested: dripping tap close-up -->
+        <img src="1.jpg"
+             alt="A dripping tap wasting water, representing household water waste">
+        <div class="action-card-body">
+          <h3>Fix Leaks &amp; Cut Home Water Waste</h3>
+          <p>Turn off taps when brushing teeth, fix dripping pipes, and switch to low-flow showerheads. Small daily habits reduce thousands of litres wasted each year.</p>
+          <span class="impact-badge">Impact: 3 points</span>
+        </div>
+      </article>
+
+      <!-- CARD 2 – Use a water filter (2 pts) -->
+      <article class="action-card" role="listitem"
+               data-points="2"
+               aria-label="Action: Use a water filter instead of buying bottled water. Impact: 2 points."
+               tabindex="0">
+        <div class="card-select-bar"></div>
+        <div class="card-tick" aria-hidden="true">&#10003;</div>
+        <!-- Suggested: reusable water bottle with filter beside a tap -->
+        <img src="2.jpg"
+             alt="A reusable water bottle with filter beside a tap, representing cleaner and sustainable water use">
+        <div class="action-card-body">
+          <h3>Switch to a Water Filter</h3>
+          <p>Replace single-use plastic bottles with a quality water filter. This reduces plastic pollution, lowers your carbon footprint, and cuts demand on municipal water treatment.</p>
+          <span class="impact-badge">Impact: 2 points</span>
+        </div>
+      </article>
+
+      <!-- CARD 3 – Raise awareness / share info (2 pts) -->
+      <article class="action-card" role="listitem"
+               data-points="2"
+               aria-label="Action: Share information about the water crisis. Impact: 2 points."
+               tabindex="0">
+        <div class="card-select-bar"></div>
+        <div class="card-tick" aria-hidden="true">&#10003;</div>
+        <!-- Suggested: person on phone sharing content, social media illustration -->
+        <img src="5.jpg"
+             alt="Awareness">
+        <div class="action-card-body">
+          <h3>Raise Awareness &amp; Share the Crisis</h3>
+          <p>Share verified facts about water scarcity with your network. Educating even five people creates a ripple effect — awareness is the first step toward large-scale change.</p>
+          <span class="impact-badge">Impact: 2 points</span>
+        </div>
+      </article>
+
+      <!-- CARD 4 – Volunteer or join community projects (4 pts) -->
+      <article class="action-card" role="listitem"
+               data-points="4"
+               aria-label="Action: Volunteer for water-related community projects. Impact: 4 points."
+               tabindex="0">
+        <div class="card-select-bar"></div>
+        <div class="card-tick" aria-hidden="true">&#10003;</div>
+        <!-- Suggested: group of volunteers working on a water well or river clean-up -->
+        <img src="11.jpg"
+             alt="Volunteers working together on a community water well project in a developing region">
+        <div class="action-card-body">
+          <h3>Volunteer for Water Projects</h3>
+          <p>Join local or international volunteer programmes focused on water access, sanitation infrastructure, or river clean-up. Direct action has the highest per-person impact.</p>
+          <span class="impact-badge">Impact: 4 points</span>
+        </div>
+      </article>
+
+      <!-- CARD 5 – Support water policy / sign petitions (3 pts) -->
+      <article class="action-card" role="listitem"
+               data-points="3"
+               aria-label="Action: Sign petitions and support water policy. Impact: 3 points."
+               tabindex="0">
+        <div class="card-select-bar"></div>
+        <div class="card-tick" aria-hidden="true">&#10003;</div>
+        <!-- Suggested: person signing a petition or hands holding a policy document -->
+        <img src="3.jpg"
+             alt="Person signing a water rights petition, representing civic engagement for clean water policy">
+        <div class="action-card-body">
+          <h3>Support Water Policy &amp; Petitions</h3>
+          <p>Sign and share petitions that push governments to fund water infrastructure. Write to your local representative. Policy change at scale is driven by sustained public pressure.</p>
+          <span class="impact-badge">Impact: 3 points</span>
+        </div>
+      </article>
+
+      <!-- CARD 6 – Reduce meat consumption to save water (2 pts) -->
+      <!-- Student decision: Added as the 6th required card.
+           Meat production is one of the largest consumers of fresh water globally. -->
+      <article class="action-card" role="listitem"
+               data-points="2"
+               aria-label="Action: Reduce meat consumption to save water. Impact: 2 points."
+               tabindex="0">
+        <div class="card-select-bar"></div>
+        <div class="card-tick" aria-hidden="true">&#10003;</div>
+        <!-- Suggested: plant-based meal on a plate or market vegetables -->
+        <img src="4.jpg"
+             alt="A plant-based meal representing reduced meat consumption and lower water footprint">
+        <div class="action-card-body">
+          <h3>Eat Less Meat to Lower Your Water Footprint</h3>
+          <p>Producing 1 kg of beef uses up to 15,000 litres of water. Reducing meat consumption — even one day a week — significantly lowers your personal water footprint.</p>
+          <span class="impact-badge">Impact: 2 points</span>
+        </div>
+      </article>
+
+    </div><!-- /action-grid -->
+  </section>
+
+  <!-- RESULTS / FEEDBACK SECTION -->
+  <!-- Background image changed by JS: low=results-low.jpg / medium=results-mid.jpg / high=results-high.jpg -->
+  <section class="ais-results" id="aisResults" aria-label="Your impact score and feedback" aria-live="polite">
+    <div class="rsults-overlay" aria-hidden="true"></div>
+    <div class="results-inner">
+
+      <span class="impact-level-label" id="impactLevel">Select actions above to begin</span>
+      <div class="score-display" id="scoreDisplay" aria-label="Total impact score">0</div>
+      <p class="score-label">total impact points</p>
+
+      <p class="impact-message" id="impactMessage">
+        Choose one or more actions above. Your cumulative impact score will appear here.
+      </p>
+
+      <p class="results-stats" id="resultsStats">
+        0 of 6 actions selected
+      </p>
+
+      <button class="btn-reset" id="resetBtn" aria-label="Reset all selected actions">
+        Reset All Actions
+      </button>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER – copied from shared template (Student 1).
+     Updated: Page Editor and Validation links point to Student 2's pages. -->
+<footer>
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Student 2</h4>
+      <a href="pageEditor_ST2.html">Page Editor</a>
+      <a href="validation_ST2.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>Divya Sapkota | w2158226 | Student 2</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT – AIS Interaction Logic
+     
+     Impact level thresholds (clearly stated as required):
+       Low    = 0 – 5 points  → results-low.jpg background
+       Medium = 6 – 11 points → results-mid.jpg background
+       High   = 12+ points    → results-high.jpg background
+     
+     Max possible score: 16 points (all 6 cards selected)
+============================================================ -->
+<script>
+  // ── DATA ──────────────────────────────────────────────────────
+  // Background images per impact level (swap with your own images)
+  var BG_IMAGES = {
+    none:   '',
+    low:    'results-low.jpg',    // e.g. dry cracked earth
+    medium: 'results-mid.jpg',    // e.g. person at a standpipe
+    high:   'results-high.jpg'    // e.g. clean water flowing, happy community
+  };
+
+  // Summary messages per level
+  var MESSAGES = {
+    none:   'Choose one or more actions above. Your cumulative impact score will appear here.',
+    low:    'A small but meaningful start. Every drop counts — consider adding more actions to increase your impact on SDG 6.',
+    medium: 'You are making a real difference. Your commitment to water conservation is helping build a more sustainable future.',
+    high:   'Outstanding commitment! Your choices represent the kind of individual action that, scaled across communities, can genuinely move the needle on the global water crisis.'
+  };
+
+  // Level labels per impact level
+  var LABELS = {
+    none:   'Select actions above to begin',
+    low:    'Low Impact',
+    medium: 'Medium Impact',
+    high:   'High Impact'
+  };
+
+  // ── DOM REFERENCES ────────────────────────────────────────────
+  var cards       = document.querySelectorAll('.action-card');
+  var scoreEl     = document.getElementById('scoreDisplay');
+  var levelEl     = document.getElementById('impactLevel');
+  var messageEl   = document.getElementById('impactMessage');
+  var statsEl     = document.getElementById('resultsStats');
+  var resultsEl   = document.getElementById('aisResults');
+  var resetBtn    = document.getElementById('resetBtn');
+
+  // ── STATE ─────────────────────────────────────────────────────
+  // Object to track which cards are selected (keyed by index)
+  var selectedCards = {};
+
+  // ── FUNCTIONS ─────────────────────────────────────────────────
+
+  // Calculate total score from selected cards
+  function calcScore() {
+    var total = 0;
+    for (var key in selectedCards) {
+      if (selectedCards[key]) {
+        total += selectedCards[key];
+      }
+    }
+    return total;
+  }
+
+  // Count how many cards are selected
+  function countSelected() {
+    var count = 0;
+    for (var key in selectedCards) {
+      if (selectedCards[key]) count++;
+    }
+    return count;
+  }
+
+  // Determine impact level string from score
+  function getLevel(score) {
+    if (score === 0)  return 'none';
+    if (score <= 5)   return 'low';    // Low:    1 – 5 pts
+    if (score <= 11)  return 'medium'; // Medium: 6 – 11 pts
+    return 'high';                     // High:   12+ pts
+  }
+
+  // Update the results section with current score and level
+  function updateResults() {
+    var score   = calcScore();
+    var count   = countSelected();
+    var level   = getLevel(score);
+
+    // Update score number
+    scoreEl.textContent = score;
+
+    // Update impact level label
+    levelEl.textContent = LABELS[level];
+
+    // Update summary message
+    messageEl.textContent = MESSAGES[level];
+
+    // Update stats line
+    statsEl.textContent = count + ' of 6 actions selected';
+
+    // Change background image based on impact level (JS-controlled)
+    if (BG_IMAGES[level]) {
+      resultsEl.style.backgroundImage = 'url(' + BG_IMAGES[level] + ')';
+    } else {
+      resultsEl.style.backgroundImage = 'none';
+    }
+  }
+
+  // Toggle a card's selected state
+  function toggleCard(card, index) {
+    var points = parseInt(card.getAttribute('data-points'), 10);
+
+    if (selectedCards[index]) {
+      // Deselect
+      selectedCards[index] = 0;
+      card.classList.remove('selected');
+      card.setAttribute('aria-pressed', 'false');
+    } else {
+      // Select
+      selectedCards[index] = points;
+      card.classList.add('selected');
+      card.setAttribute('aria-pressed', 'true');
+    }
+
+    updateResults();
+  }
+
+  // ── EVENT LISTENERS ───────────────────────────────────────────
+
+  // Attach click and keyboard listeners to each card
+  cards.forEach(function (card, index) {
+    // Initialise state
+    selectedCards[index] = 0;
+    card.setAttribute('aria-pressed', 'false');
+    card.setAttribute('role', 'button');
+
+    // Click to toggle
+    card.addEventListener('click', function () {
+      toggleCard(card, index);
+    });
+
+    // Keyboard: Enter or Space to toggle (accessibility)
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleCard(card, index);
+      }
+    });
+
+    // Hover: JS event listeners as required (visual handled by CSS)
+    card.addEventListener('mouseenter', function () {
+      card.style.cursor = 'pointer';
+    });
+  });
+
+  // Reset button – clear all selections
+  resetBtn.addEventListener('click', function () {
+    cards.forEach(function (card, index) {
+      selectedCards[index] = 0;
+      card.classList.remove('selected');
+      card.setAttribute('aria-pressed', 'false');
+    });
+    updateResults();
+  });
+
+  // Initialise results on page load
+  updateResults();
+</script>
+
+</body>
+</html>

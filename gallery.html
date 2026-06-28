@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | ProjectBlue</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    .page-banner {
+      background-color: #0f1e33;
+      padding: 56px 40px 48px;
+      text-align: center;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .page-banner h1 {
+      color: var(--white);
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .page-banner p {
+      color: rgba(255,255,255,0.5);
+      max-width: 480px;
+      margin: 0 auto;
+      font-size: 0.92rem;
+    }
+    .thumb-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 28px;
+      overflow: hidden;
+    }
+
+    .thumb-card {
+      float: left;
+      width: 30%;
+      margin-right: 4%;
+      margin-bottom: 28px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(48,70,116,0.12);
+      cursor: pointer;
+      background-color: var(--white);
+    }
+
+    .thumb-card:nth-child(3n) { margin-right: 0; }
+
+    .thumb-card:hover {
+      box-shadow: 0 10px 28px rgba(48,70,116,0.22);
+    }
+
+    .thumb-card.hovered {
+      box-shadow: 0 10px 28px rgba(48,70,116,0.22);
+    }
+    .thumb-card:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .thumb-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .thumb-label { padding: 14px 16px 16px; }
+    .thumb-label h2 { font-size: 0.95rem; margin-bottom: 4px; color: var(--primary); }
+    .thumb-label p  { font-size: 0.8rem; color: var(--text-light); margin: 0; }
+
+    .expand-badge {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--accent);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .thumb-card { position: relative; }
+    .thumb-card:hover .expand-badge,
+    .thumb-card.hovered .expand-badge { display: block; }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(8,18,34,0.88);
+      z-index: 9999;
+    }
+
+    .modal-overlay.open { display: block; }
+
+    .modal-box {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      max-width: 760px;
+      width: 90%;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -44vh;
+      margin-left: -380px;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .modal-body { padding: 28px 32px 32px; }
+    .modal-body h2 { font-size: 1.3rem; margin-bottom: 12px; color: var(--primary); }
+    .modal-body p  { font-size: 0.92rem; line-height: 1.8; color: var(--text-mid); }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: var(--primary-dark);
+      color: var(--white);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .modal-close:hover { background-color: var(--accent); }
+    .modal-controls {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--surface);
+      overflow: hidden;
+    }
+
+    .modal-controls label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      margin-right: 6px;
+    }
+
+    .modal-controls select {
+      padding: 5px 10px;
+      border: 1px solid var(--accent-light);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      background-color: var(--white);
+      color: var(--text-dark);
+      margin-right: 16px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 860px) {
+      .thumb-card { width: 47%; margin-right: 6%; }
+      .thumb-card:nth-child(3n) { margin-right: 6%; }
+      .thumb-card:nth-child(2n) { margin-right: 0; }
+      .modal-box  { width: 94%; margin-left: -47%; }
+    }
+
+    @media (max-width: 540px) {
+      .thumb-card { width: 100%; margin-right: 0; }
+      .modal-image { height: 200px; }
+      .modal-body  { padding: 20px; }
+      .modal-box   { width: 96%; margin-left: -48%; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="Project Blue logo">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links" aria-label="Main navigation">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="gallery.html" class="active" aria-current="page">Gallery</a></li>
+      <li><a href="ais.html">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="page-banner" aria-label="Gallery page header">
+    <h1>Faces of the Water Crisis</h1>
+    <p>Click any image to read the story behind it. Press Escape or click outside to close.</p>
+  </section>
+  <div class="thumb-grid" id="thumbGrid" role="list" aria-label="Photo gallery">
+
+    <div class="thumb-card" tabindex="0" role="listitem" data-id="1"
+      aria-label="Photo 1: Drinking from the source. Press Enter to expand.">
+      <span class="expand-badge">Expand</span>
+      <img src="a.jpeg"
+        alt="A person bent over a murky open water source drinking directly from it in Sub-Saharan Africa">
+      <div class="thumb-label">
+        <h2>Drinking from the Source</h2>
+        <p>Sub-Saharan Africa</p>
+      </div>
+    </div>
+
+    <div class="thumb-card" tabindex="0" role="listitem" data-id="2"
+      aria-label="Photo 2: Joy of clean water. Press Enter to expand.">
+      <span class="expand-badge">Expand</span>
+      <img src="d.jpeg"
+        alt="A young child laughing with joy as clean water flows over their face and hands">
+      <div class="thumb-label">
+        <h2>The Joy of Clean Water</h2>
+        <p>What access changes everything</p>
+      </div>
+    </div>
+
+    <div class="thumb-card" tabindex="0" role="listitem" data-id="3"
+      aria-label="Photo 3: Shared hands, shared source. Press Enter to expand.">
+      <span class="expand-badge">Expand</span>
+      <img src="c.jpeg"
+        alt="Multiple pairs of hands reaching under a communal water pipe sharing a scarce water source">
+      <div class="thumb-label">
+        <h2>Shared Hands, Shared Source</h2>
+        <p>Community dependence on one pipe</p>
+      </div>
+    </div>
+
+    <div class="thumb-card" tabindex="0" role="listitem" data-id="4"
+      aria-label="Photo 4: No choice at all. Press Enter to expand.">
+      <span class="expand-badge">Expand</span>
+      <img src="l.jpeg"
+        alt="A child holding two bottles one with dirty brown water, one with clear clean water">
+      <div class="thumb-label">
+        <h2>No Choice at All</h2>
+        <p>Dirty vs clean — the daily reality</p>
+      </div>
+    </div>
+
+    <div class="thumb-card" tabindex="0" role="listitem" data-id="5"
+      aria-label="Photo 5: Filling what they have. Press Enter to expand.">
+      <span class="expand-badge">Expand</span>
+      <img src="k.jpeg"
+        alt="filling up dirty water as its the only thing they have">
+      <div class="thumb-label">
+        <h2>Filling What They Have</h2>
+        <p>When a trickle is a luxury</p>
+      </div>
+    </div>
+
+    <div class="thumb-card" tabindex="0" role="listitem" data-id="6"
+      aria-label="Photo 6: Relief. Press Enter to expand.">
+      <span class="expand-badge">Expand</span>
+      <img src="m.jpeg"
+        alt="Close-up of a child's face experiencing the relief and joy of clean water">
+      <div class="thumb-label">
+        <h2>Relief</h2>
+        <p>What a glass of clean water means</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+<div class="modal-overlay" id="modalOverlay"
+  role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Close expanded view">&times;</button>
+    <img src="#" alt="" class="modal-image" id="modalImg">
+    <div class="modal-body" id="modalContent">
+      <h2 id="modalTitle">&nbsp;</h2>
+      <p  id="modalDesc"></p>
+      <div class="modal-controls" role="group" aria-label="Customise the expanded view">
+        <label for="colourPick">Colour:</label>
+        <select id="colourPick" aria-label="Choose a colour scheme">
+          <option value="default">Default</option>
+          <option value="ocean">Ocean</option>
+          <option value="midnight">Midnight</option>
+          <option value="warm">Warm Sand</option>
+        </select>
+        <label for="fontPick">Font:</label>
+        <select id="fontPick" aria-label="Choose a font style">
+          <option value="lato">Lato</option>
+          <option value="serif">Serif</option>
+          <option value="mono">Monospace</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Team</h4>
+      <a href="pageEditor_ST1.html">Page Editor</a>
+      <a href="validation_ST1.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>Swosti Tamrakar | w2148847 | Student 1</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+<script>
+  var items = {
+    '1': {
+      src:   'a.jpeg',
+      alt:   'Person drinking directly from a contaminated water source',
+      title: 'Drinking from the Source',
+      desc:  'In parts of Chad and Somalia, open ponds and slow-moving rivers are the only water source within hours of walking. People drink from the same water their animals use  the same water that carries bacteria, parasites, and disease. This is not poverty as an abstract idea. It is a specific, preventable daily crisis that SDG 6 exists to end.'
+    },
+    '2': {
+      src:   'd.jpeg',
+      alt:   'Child laughing as clean water flows over their face',
+      title: 'The Joy of Clean Water',
+      desc:  'This photograph captures something most of us take for granted the simple pleasure of clean water. For this child, access to a functioning water point is not normal. It is extraordinary. When clean water infrastructure reaches a community, the transformation is immediate: health improves, children stay in school, and people reclaim hours of their lives previously spent on collection.'
+    },
+    '3': {
+      src:   'c.jpeg',
+      alt:   'Multiple hands sharing water from a communal pipe',
+      title: 'Shared Hands, Shared Source',
+      desc:  'A single standpipe serving an entire neighbourhood is a common reality across Sub-Saharan Africa. Queues form before sunrise. Families carry what they can. Sharing a source this way creates both social bonds and serious health risks a broken pipe or contaminated source affects everyone. Investment in distributed, household-level water access is one of the highest-return public health interventions known.'
+    },
+    '4': {
+      src:   'l.jpeg',
+      alt:   'Child holding one bottle of dirty water and one of clean water',
+      title: 'No Choice at All',
+      desc:  'On the left: murky, brown, contaminated water. On the right: clear, safe drinking water. Millions of people in Sub-Saharan Africa do not get to choose between these they only have access to the glass on the left. The difference between them is not complex technology. It is investment, infrastructure, and political will.'
+    },
+    '5': {
+      src:   'k.jpeg',
+      alt:   'filling up dirty water because its all they have',
+      title: 'Filling What They Have',
+      desc:  'A slow trickle from a shared tap into a worn bucket. This is not a failure of effort it is a failure of infrastructure. For millions of families, collecting enough water for a day\'s cooking, drinking, and washing requires hours of waiting and carrying. The physical burden falls hardest on women and children, directly limiting their access to education and economic life.'
+    },
+    '6': {
+      src:   'm.jpeg',
+      alt:   'Close-up of a child experiencing relief from clean water',
+      title: 'Relief',
+      desc:  'Clean water should not feel like a miracle. But for communities that have lived without it, a functioning water point genuinely changes the quality of every single day. The relief visible here is real, it is the relief of not being thirsty, not being sick, not spending the morning hours walking. It is the face of what SDG 6 is working toward.'
+    }
+  };
+
+  var colours = {
+    default:  { bg: '#ffffff', text: '#4a637a', heading: '#304674' },
+    ocean:    { bg: '#eaf6fb', text: '#1a3a5c', heading: '#1a9fd4' },
+    midnight: { bg: '#1b2e4d', text: '#a8c4d8', heading: '#5bc8f0' },
+    warm:     { bg: '#fdf6ee', text: '#5c3a1e', heading: '#a05a10' }
+  };
+
+  var fonts = {
+    lato:  "'Lato', sans-serif",
+    serif: "Georgia, serif",
+    mono:  "'Courier New', monospace"
+  };
+  var overlay   = document.getElementById('modalOverlay');
+  var modalImg  = document.getElementById('modalImg');
+  var modalTtl  = document.getElementById('modalTitle');
+  var modalDsc  = document.getElementById('modalDesc');
+  var modalCnt  = document.getElementById('modalContent');
+  var closeBtn  = document.getElementById('modalClose');
+  var colourSel = document.getElementById('colourPick');
+  var fontSel   = document.getElementById('fontPick');
+
+  function applyStyle() {
+    var c = colours[colourSel.value];
+    var f = fonts[fontSel.value];
+    modalCnt.style.backgroundColor = c.bg;
+    modalCnt.style.color           = c.text;
+    modalCnt.style.fontFamily      = f;
+    modalTtl.style.color           = c.heading;
+    modalDsc.style.color           = c.text;
+  }
+
+  function openModal(id) {
+    var d = items[id];
+    if (!d) return;
+    modalImg.src         = d.src;
+    modalImg.alt         = d.alt;
+    modalTtl.textContent = d.title;
+    modalDsc.textContent = d.desc;
+    colourSel.value = 'default';
+    fontSel.value   = 'lato';
+    applyStyle();
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll('.thumb-card').forEach(function(card) {
+
+    card.addEventListener('mouseover', function() {
+      card.classList.add('hovered');
+    });
+    card.addEventListener('mouseout', function() {
+      card.classList.remove('hovered');
+    });
+
+    card.addEventListener('click', function() {
+      openModal(card.getAttribute('data-id'));
+    });
+
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(card.getAttribute('data-id'));
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  colourSel.addEventListener('change', applyStyle);
+  fontSel.addEventListener('change',   applyStyle);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation  Student 3  ProjectBlue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #f5f8fc;
+      color: #1e2d40;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .val-header {
+      background: #0b1a2c;
+      padding: 32px 48px;
+      border-bottom: 3px solid #1a9fd4;
+    }
+
+    .val-header h1 {
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .val-header p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+    }
+
+    .val-header a { color: #5ec7f0; }
+
+    .val-body {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+ 
+    .contents-box {
+      background: #fff;
+      border: 1px solid #cce0ef;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .contents-box h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a9fd4;
+      margin-bottom: 12px;
+    }
+
+    .contents-box ol { padding-left: 20px; }
+    .contents-box li { margin-bottom: 6px; }
+    .contents-box a { color: #0a3d55; font-size: 0.88rem; text-decoration: none; }
+    .contents-box a:hover { text-decoration: underline; color: #1a9fd4; }
+ 
+    .val-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(11,26,44,0.06);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+    }
+
+    .val-section h2 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #0b1a2c;
+      margin-bottom: 6px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0eef7;
+    }
+
+    .val-section p {
+      font-size: 0.88rem;
+      color: #3a4f6a;
+      margin: 12px 0;
+    }
+
+    .val-section a {
+      color: #1a9fd4;
+      font-weight: 700;
+    }
+ 
+    .badge-pass {
+      display: inline-block;
+      background: #d4f0e0;
+      color: #1a6b3a;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 12px;
+      margin-left: 10px;
+    }
+ 
+    .screenshot-placeholder {
+      width: 100%;
+      border: 2px dashed #cce0ef;
+      border-radius: 6px;
+      padding: 48px 20px;
+      text-align: center;
+      margin: 20px 0;
+      background: #f9fcff;
+    }
+
+    .screenshot-placeholder p {
+      font-size: 0.85rem;
+      color: #7a9ab5;
+      margin: 0;
+    }
+
+    .screenshot-placeholder strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #0a3d55;
+      margin-bottom: 6px;
+    }
+ 
+    .reflection-box {
+      background: #eef6fc;
+      border-left: 4px solid #1a9fd4;
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+
+    .reflection-box h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0a3d55;
+      margin-bottom: 8px;
+    }
+
+    .reflection-box p {
+      font-size: 0.85rem;
+      color: #3a4f6a;
+      margin: 0;
+    }
+ 
+    .page-link-badge {
+      display: inline-block;
+      background: #0b1a2c;
+      color: #5ec7f0;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin: 8px 8px 8px 0;
+    }
+
+    .page-link-badge:hover { background: #1a9fd4; color: #fff; }
+ 
+    .val-footer {
+      background: #0b1a2c;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.78rem;
+    }
+
+    .val-footer a { color: #5ec7f0; }
+ 
+    .back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #1a9fd4;
+      color: #fff;
+      padding: 8px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 100;
+    }
+
+    .back-top:hover { background: #0b1a2c; }
+  </style>
+</head>
+<body>
+
+<a id="top"></a>
+<div class="val-header">
+  <h1>Validation Page – Student 3</h1>
+  <p>[Ruchee Tuladhar] &nbsp;|&nbsp; [w2148853] &nbsp;|&nbsp; Web Design &amp; Development &nbsp;|&nbsp;
+    <a href="pageEditor_ST3.html">← Page Editor</a> &nbsp;|&nbsp;
+    <a href="home.html">ProjectBlue Website</a>
+  </p>
+</div>
+
+<div class="val-body">
+ 
+  <div class="contents-box" role="navigation" aria-label="Validation page contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#val-feedback">1. feedback.html – Validation Evidence</a></li>
+      <li><a href="#val-team">2. team.html – Validation Evidence</a></li>
+      <li><a href="#val-content">3. content_ST3.html – Validation Evidence</a></li>
+      <li><a href="#val-reflection">4. Reflection on Validation Process</a></li>
+    </ol>
+  </div>
+ 
+  <div class="val-section">
+    <h2>About This Validation Page</h2>
+    <p>This page provides evidence that all HTML pages implemented by Student 3 have been validated using 
+      the W3C Markup Validation Service 
+      (<a href="https://validator.w3.org" target="_blank" rel="noopener">https://validator.w3.org</a>).
+       Validation was performed by submitting each page's source code directly.
+        Screenshots of the validation results are included below for each page.</p>
+    <p><strong>Pages validated:</strong> feedback.html &nbsp;|&nbsp
+       team.html &nbsp;|&nbsp; content_ST3.html</p>
+    <p><strong>Pages NOT validated here (per spec):</strong> pageEditor_ST3.html 
+      &nbsp;|&nbsp; validation_ST3.html</p>
+  </div>
+ 
+  <section class="val-section" id="val-feedback" aria-labelledby="val-feedback-h2">
+    <h2 id="val-feedback-h2">
+      1. feedback.html
+      <span class="badge-pass">✓ No Errors</span>
+    </h2>
+    <a href="feedback.html" class="page-link-badge" target="_blank">↗ View Page</a>
+    <a href="pageEditor_ST3.html#feedback-page" class="page-link-badge" target="_blank">↗ Page Editor Section</a>
+
+    <p>The Feedback &amp; Programme Directory page was validated using the W3C Markup Validation Service. 
+      The screenshot below shows the validation result with no errors.</p>
+  <img src="image/val_feedback.png" alt="W3C validation result for feedback.html showing no errors"
+   style="width:100%; border-radius:6px;
+    margin:20px 0;">
+
+    <p>Any warnings present relate to the use of <code>aria-hidden="true"</code> 
+      on decorative background divs, which are considered best practice for accessibility and do not constitute errors.</p>
+  </section>
+ 
+  <section class="val-section" id="val-team" aria-labelledby="val-team-h2">
+    <h2 id="val-team-h2">
+      2. team.html
+      <span class="badge-pass">✓ No Errors</span>
+    </h2>
+    <a href="team.html" class="page-link-badge" target="_blank">↗ View Page</a>
+    <a href="pageEditor_ST3.html#team-page" class="page-link-badge" target="_blank">↗ Page Editor Section</a>
+
+    <p>The Team Page was validated using the W3C Markup Validation Service.
+       The screenshot below shows the result with no errors.</p>
+   <img src="image/val_team.png" alt="W3C validation result for team.html showing no errors"
+    style="width:100%; border-radius:6px; margin:20px 0;">
+  </section>
+ 
+  <section class="val-section" id="val-content" aria-labelledby="val-content-h2">
+    <h2 id="val-content-h2">
+      3. content_ST3.html
+      <span class="badge-pass">✓ No Errors</span>
+    </h2>
+    <a href="content_ST3.html" class="page-link-badge" target="_blank">↗ View Page</a>
+    <a href="pageEditor_ST3.html#content-page" class="page-link-badge" target="_blank">↗ Page Editor Section</a>
+
+    <p>The Content Page (The Sanitation Gap) was validated using the W3C Markup Validation Service.
+       The screenshot below shows the result with no errors.</p>
+ 
+     <img src="image/val_content.png" alt="W3C validation result for content_ST3.html showing no errors" 
+     style="width:100%; border-radius:6px; margin:20px 0;">
+  </section>
+ 
+  <section class="val-section" id="val-reflection" aria-labelledby="val-reflection-h2">
+    <h2 id="val-reflection-h2">4. Reflection on the Validation Process</h2>
+    <p>HTML validation was performed on each page after the main implementation was complete,
+       using the W3C Markup Validation Service via the "Validate by Direct Input" method.</p>
+
+    <div class="reflection-box">
+      <h3>Errors Encountered and Resolved</h3>
+      <p>During initial validation, a small number of errors were found and corrected before the final screenshots were taken.
+         These included:</p>
+    </div>
+
+    <p style="margin-top: 16px;"><strong>Error 1  Unclosed element:</strong> 
+      An early draft of <code>feedback.html</code> had a <code>&lt;div&gt;</code> inside the programme
+       grid that was not closed correctly.
+       The validator flagged this immediately. It was corrected by ensuring all <code>&lt;div&gt;</code>
+        elements had matching closing tags, and re-running validation to confirm.</p>
+
+    <p><strong>Error 2  Missing <code>alt</code> attribute:</strong> During team.html development, 
+      one of the team member <code>&lt;img&gt;</code> elements was initially missing its <code>alt</code> attribute.
+       The validator flagged this as an error. All images were then checked systematically and descriptive <code>alt</code>
+        text was added to every image across all three pages.</p>
+
+    <p><strong>Error 3  Invalid nesting:</strong> In content_ST3.html, a <code>&lt;p&gt;</code> 
+      element was accidentally nested inside another <code>&lt;p&gt;</code> element (a common HTML error). 
+      The validator detected this and it was corrected by closing the outer paragraph before opening the nested content in a 
+      <code>&lt;div&gt;</code> instead.</p>
+
+    <h3>Lessons Learned</h3>
+    <p>Running validation regularly during development —rather than only at the end  would have caught these errors earlier 
+      and reduced rework. The W3C validator provides clear, line-numbered error messages that make debugging
+       straightforward. Going forward, I will validate after completing each major section of a page rather 
+       than waiting until the entire page is finished.</p>
+  </section>
+
+</div>
+
+
+<div class="val-footer">
+  <p>[Ruchee Tuladhar] | [w2148853] | Student 3 | Web Design &amp; Development &copy; 2026 ProjectBlue</p>
+  <p><a href="pageEditor_ST3.html">Page Editor</a> &nbsp;|&nbsp; <a href="home.html">Back to Website</a></p>
+</div>
+
+<a href="#top" class="back-top" aria-label="Back to top of page">↑ Top</a>
+
+</body>
+</html>

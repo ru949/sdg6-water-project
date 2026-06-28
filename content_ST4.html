@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Ecosystems | Student 4</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body id="content_ST4_html">
+    <header>
+        <nav>
+            <a href="home.html" class="logo">
+                <img src="logo.png" alt="">
+                <span class="logo-text">ProjectBlue</span>
+            </a>
+            <ul class="nav-links" aria-label="Main navigation">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="ais.html">AIS</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="section-title">
+            <h1><i class="fa-solid fa-fish" style="color: #38b2ac; margin-right: 15px;"></i>Water-Related Ecosystems</h1>
+            <p>Target 6.6: Protect and restore water-related ecosystems.</p>
+        </div>
+
+        <nav class="internal-nav" style="background:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:30px;">
+            <p style="font-weight:700; margin-bottom:10px;">In this section:</p>
+            <ul style="list-style:none; display:flex; gap:15px; flex-wrap:wrap;">
+                <li><a href="#wetlands" style="color:var(--primary-blue); font-weight:600;">Importance of Wetlands</a></li>
+                <li><a href="#pollution" style="color:var(--primary-blue); font-weight:600;">Pollution Threats</a></li>
+                <li><a href="#stats" style="color:var(--primary-blue); font-weight:600;">Biodiversity Data</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-body">
+            <section id="wetlands" style="margin-bottom: 50px;">
+                <h2>Importance of Wetlands</h2>
+                <div style="display: flex; gap: 20px; align-items: start; margin-bottom: 30px;">
+                    <div style="flex: 1;">
+                        <p>Wetlands, forests, and aquifers provide critical services such as natural water filtration, flood control, and groundwater recharge. They are the base of global water security.</p>
+                        <ul>
+                            <li>Natural water purification habitats.</li>
+                            <li>Biodiversity hotspots (fish-spawning, migratory birds).</li>
+                            <li>Carbon sequestration and climate regulation.</li>
+                        </ul>
+                    </div>
+                    <figure style="flex: 1; max-width: 400px; margin: 0;">
+                        <img src="image/Thriving_Wetlands_ST4.avif" alt="Healthy Wetland Ecosystem" style="width: 100%; border-radius: 10px;">
+                        <figcaption style="font-size: 0.8rem; color: #666; margin-top: 5px;">Figure 1: Thriving Wetlands - Nature's natural water filters.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <div style="display: flex; gap: 20px; margin-bottom: 40px;">
+                <figure style="flex: 1; margin: 0;">
+                    <img src="image/Freshwater_Lakes_ST4.jpg" alt="Mountain Lake Biodiversity" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                    <figcaption style="font-size: 0.8rem; color: #666; margin-top: 5px;">Figure 2: Freshwater Lakes - Essential reservoirs of life.</figcaption>
+                </figure>
+                <figure style="flex: 1; margin: 0;">
+                    <img src="image/Forest_Watersheds_ST4.avif" alt="Lush Forest Stream" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                    <figcaption style="font-size: 0.8rem; color: #666; margin-top: 5px;">Figure 3: Forest Watersheds - Protecting the source.</figcaption>
+                </figure>
+            </div>
+
+            <section id="pollution" style="margin-bottom: 50px; clear:both;">
+                <h2>Pollution Threats</h2>
+                <p>Human activities, primarily industrial discharge and agricultural runoff, contribute to the degradation of our freshwater sources. Plastics and chemical pollutants are increasingly present in groundwater.</p>
+                <blockquote>
+                    "Every year, millions of tons of untreated wastewater are dumped into our oceans and rivers, leading to 'dead zones' where no aquatic life can survive."
+                </blockquote>
+            </section>
+
+            <section id="stats" style="margin-bottom: 50px;">
+                <h2>Biodiversity Statistics</h2>
+                <div style="display: flex; gap: 20px; align-items: start;">
+                    <figure style="flex: 1; max-width: 400px; margin: 0;">
+                        <img src="image/Biodiversity_ST4.avif" alt="Rich Ecosystem Diversity" style="width: 100%; border-radius: 10px;">
+                        <figcaption style="font-size: 0.8rem; color: #666; margin-top: 5px;">Figure 4: Global Biodiversity - Dependent on healthy waterways.</figcaption>
+                    </figure>
+                    <div style="flex: 1;">
+                        <table class="data-table">
+                            <tr><th>Ecosystem Type</th><th>Loss in Area (%)</th><th>Species at Risk (%)</th></tr>
+                            <tr><td>Wetlands</td><td>35% Loss</td><td>25% Endangered</td></tr>
+                            <tr><td>Rivers & Aquifers</td><td>20% Less Flow</td><td>15% High Risk</td></tr>
+                            <tr><td>Coastal Mangroves</td><td>30% Loss</td><td>30% Critically At-Risk</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <a href="home.html" style="font-weight:700; color:var(--primary-blue);">&larr; Return Home</a>
+    </main>
+
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position:fixed; bottom:20px; right:20px; cursor:pointer; background:var(--primary-blue); color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow);">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Prabhakar Khatri (w2152989) | <a href="pageEditor_ST4.html" style="color:white; text-decoration:underline;">Page Editor</a> | <a href="validation_ST4.html" style="color:white; text-decoration:underline;">Validation</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

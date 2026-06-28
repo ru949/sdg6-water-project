@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Scale of the Crisis | ProjectBlue</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    .page-banner {
+      background-color: #0f1e33;
+      padding: 60px 40px 52px;
+      text-align: center;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .page-banner h1 {
+      color: var(--white);
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+
+    .page-banner p {
+      color: rgba(255,255,255,0.5);
+      max-width: 540px;
+      margin: 0 auto;
+      font-size: 0.93rem;
+    }
+    .content-wrap {
+      max-width: 1180px;
+      margin: 50px auto;
+      padding: 0 28px;
+      overflow: hidden;
+    }
+    .side-nav {
+      float: left;
+      width: 200px;
+      position: sticky;
+      top: 82px;
+      background-color: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(48,70,116,0.12);
+      padding: 20px 16px;
+      border-top: 3px solid var(--accent);
+    }
+
+    .side-nav .side-nav-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .side-nav ul li { margin-bottom: 4px; }
+
+    .side-nav ul li a {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      display: block;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+    }
+
+    .side-nav ul li a:hover {
+      background-color: var(--surface);
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+    .article {
+      margin-left: 240px;
+    }
+
+    .article section {
+      margin-bottom: 56px;
+      scroll-margin-top: 86px;
+    }
+
+    .article h2 {
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--surface);
+      color: var(--primary);
+    }
+
+    .article h3 {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin: 20px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .article p {
+      font-size: 0.94rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+    }
+
+    .art-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(48,70,116,0.14);
+      margin: 20px 0;
+      border: 1px solid rgba(48,70,116,0.08);
+    }
+    .img-pair {
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .img-pair img {
+      float: left;
+      width: 47%;
+      height: 370px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 12px rgba(48,70,116,0.12);
+      margin-right: 6%;
+    }
+
+    .img-pair img:last-child { margin-right: 0; }
+    .img-pair::after { content: ''; display: table; clear: both; }
+    .stat-row {
+      overflow: hidden;
+      margin: 26px 0;
+    }
+
+    .stat-box {
+      float: left;
+      width: 30%;
+      margin-right: 4%;
+      background-color: #0f1e33;
+      border-radius: var(--radius-sm);
+      padding: 20px 16px;
+      text-align: center;
+      height: 180px;
+    }
+
+    .stat-box:last-child { margin-right: 0; }
+
+    .stat-box .num {
+      display: block;
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      margin-bottom: 6px;
+    }
+
+    .stat-box .lbl {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.4;
+    }
+
+    .stat-row::after { content: ''; display: table; clear: both; }
+
+    .pull-quote {
+      border-left: 4px solid var(--accent);
+      background-color: var(--surface);
+      padding: 16px 22px;
+      margin: 24px 0;
+      font-style: italic;
+      color: var(--primary);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+    .go-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background-color: var(--primary-dark);
+      color: var(--white);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 44px;
+      font-size: 1.3rem;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      z-index: 900;
+      display: block;
+    }
+
+    .go-top:hover {
+      background-color: var(--accent);
+      color: var(--white);
+    }
+    @media (max-width: 860px) {
+      .side-nav { float: none; width: 100%; position: static; margin-bottom: 20px; }
+      .article  { margin-left: 0; }
+      .stat-box { width: 47%; margin-bottom: 14px; }
+      .stat-box:nth-child(2) { margin-right: 0; }
+      .stat-box:nth-child(3) { width: 100%; margin-right: 0; }
+      .img-pair img { width: 100%; float: none; margin-right: 0; margin-bottom: 14px; }
+    }
+
+    @media (max-width: 500px) {
+      .stat-box { width: 100%; margin-right: 0; margin-bottom: 12px; }
+      .page-banner h1 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<span id="top"></span>
+<header>
+  <nav>
+    <a href="home.html" class="logo">
+      <img src="logo.png" alt="Project Blue logo">
+      <span class="logo-text">ProjectBlue</span>
+    </a>
+    <ul class="nav-links" aria-label="Main navigation">
+      <li><a href="home.html" aria-current="page">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="ais.html">AIS</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-banner" aria-label="Page header">
+    <h1>The Scale of the Crisis</h1>
+    <p>A data-driven investigation into who lacks clean water, where, why, and what the numbers actually mean for human life.</p>
+  </section>
+
+  <div class="content-wrap">
+    <aside class="side-nav" aria-label="Jump to section">
+      <p class="side-nav-label">Contents</p>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#who">Who Is Affected</a></li>
+        <li><a href="#causes">Root Causes</a></li>
+        <li><a href="#health">Health Consequences</a></li>
+        <li><a href="#gender">Gender &amp; Water</a></li>
+        <li><a href="#action">What Needs to Change</a></li>
+      </ul>
+    </aside>
+
+    <div class="article">
+
+      <section id="overview" aria-label="Overview">
+        <h2>Overview</h2>
+        <p>
+          Water covers 71% of the Earth's surface. Yet 2.2 billion people more than one in four humans alive today
+          do not have access to safely managed drinking water. This is not a natural scarcity problem. It is a
+          distribution, infrastructure, and political will problem. The water exists. The systems to deliver it safely
+          do not reach everyone.
+        </p>
+        <p>
+          United Nations Sustainable Development Goal 6 calls for universal access to safe and affordable drinking
+          water and sanitation by 2030. As of 2026, the world is significantly off track. Sub-Saharan Africa carries
+          the heaviest burden home to more than half of all people living without basic water access globally.
+        </p>
+        <img class="art-img" src="a.jpeg"
+          alt="A person bending down to drink directly from a murky open water source in Sub-Saharan Africa, illustrating the reality of water insecurity">
+      </section>
+
+      <section id="who" aria-label="Who is affected">
+        <h2>Who Is Affected</h2>
+        <p>
+          The water crisis is not evenly distributed. It is concentrated in specific geographies, and within those,
+          it falls hardest on the poorest, most rural, and most marginalised communities.
+        </p>
+        <div class="stat-row" role="region" aria-label="Regional water access statistics">
+          <div class="stat-box">
+            <span class="num">400M+</span>
+            <span class="lbl">people in Sub-Saharan Africa without basic water access</span>
+          </div>
+          <div class="stat-box">
+            <span class="num">1 in 3</span>
+            <span class="lbl">people in Ethiopia rely on surface water like rivers and ponds</span>
+          </div>
+          <div class="stat-box">
+            <span class="num">70%</span>
+            <span class="lbl">of rural Chad has no access to clean drinking water at all</span>
+          </div>
+        </div>
+        <p>
+          In Somalia, decades of conflict have destroyed whatever water infrastructure once existed.
+          In Chad, drought and desertification are shrinking water sources faster than they can be replaced.
+          In Ethiopia, millions rely on rivers and ponds shared with livestock, with no treatment whatsoever.
+        </p>
+        <div class="img-pair">
+          <img src="q.jpeg"
+            alt="A child in a rural setting holding one glass of dirty brown water and one of clear clean water demonstrating water quality contrast">
+          <img src="r.jpeg"
+            alt="A child reaching up to fill a small bucket from a slow-dripping tap showing how precious even limited water access is">
+        </div>
+      </section>
+
+      <section id="causes" aria-label="Root causes">
+        <h2>Root Causes</h2>
+        <h3>Climate Change</h3>
+        <p>
+          The Sahel region which includes Chad, northern Nigeria, and parts of Somalia and Ethiopia is
+          warming at 1.5 times the global average rate. Rainfall is becoming more erratic. Droughts that once
+          occurred once a decade now strike multiple times within a decade. Seasonal rivers no longer flow
+          year-round. Glaciers in the Ethiopian highlands, which feed major rivers, are retreating.
+        </p>
+        <h3>Conflict and Governance</h3>
+        <p>
+          Water infrastructure requires stable governance to build and maintain. In conflict zones, pipelines
+          are destroyed, pumping stations are abandoned, and technical staff flee. Somalia has had no
+          functioning central government for much of the past three decades. Even in relatively stable
+          countries like Ethiopia, corruption and mismanagement divert infrastructure funding away from
+          rural areas.
+        </p>
+        <h3>Population Pressure</h3>
+        <p>
+          Sub-Saharan Africa has the fastest-growing population on Earth. Aquifers and rivers that were
+          adequate for communities of a few thousand are being stretched to serve tens of thousands.
+          Urban migration is creating vast informal settlements places that no water utility was designed
+          to serve, where residents pay up to 10 times more for water from vendors than wealthier citizens
+          pay through pipes.
+        </p>
+        <blockquote class="pull-quote">
+          "In Ndjamena, Chad, a family in an informal settlement may spend 20% of their income on water
+          that is still not reliably safe to drink. A kilometre away, wealthier residents pay almost nothing
+          for tap water."
+        </blockquote>
+      </section>
+
+      <section id="health" aria-label="Health consequences">
+        <h2>Health Consequences</h2>
+        <p>
+          The health consequences of contaminated water are enormous and measurable. Diarrhoeal disease
+          almost entirely preventable with clean water and sanitation kills approximately 485,000 people
+          per year globally. The majority are children under five. Cholera, typhoid, hepatitis A, and
+          Guinea worm disease remain endemic in parts of Sub-Saharan Africa.
+        </p>
+        <div class="stat-row">
+          <div class="stat-box">
+            <span class="num">485K</span>
+            <span class="lbl">deaths per year from diarrhoeal disease linked to unsafe water</span>
+          </div>
+          <div class="stat-box">
+            <span class="num">90%</span>
+            <span class="lbl">of those deaths occur in Sub-Saharan Africa and South Asia</span>
+          </div>
+          <div class="stat-box">
+            <span class="num">3.5B</span>
+            <span class="lbl">people lack safely managed sanitation, compounding water risks</span>
+          </div>
+        </div>
+        <p>
+          Sanitation compounds the water crisis. Without toilets and sewage systems, human waste enters
+          waterways. People upstream defecate into rivers that people downstream drink from. Sanitation
+          investment must accompany water investment for either to work.
+        </p>
+        <img class="art-img" src="j.jpeg"
+          alt="Multiple hands from a community gathering around a shared water pipe collecting water together showing collective dependence on a single source">
+      </section>
+
+      <section id="gender" aria-label="Gender and water">
+        <h2>Gender &amp; Water</h2>
+        <p>
+          The burden of water collection falls overwhelmingly on women and girls. In Sub-Saharan Africa,
+          women collect water in 76% of households without on-premises access. The average round trip
+          to collect water is 30 minutes but in arid regions like northern Chad or southern Ethiopia,
+          it can be 4 to 6 hours.
+        </p>
+        <p>
+          Those hours are not neutral. They are hours not spent in school. Not spent in paid employment.
+          Not spent on rest or personal development. The water crisis is therefore inseparable from
+          gender inequality it is one of the most concrete mechanisms through which structural poverty
+          is reproduced across generations.
+        </p>
+        <img class="art-img" src="t.jpeg"
+          alt="A child carrying water for long distances">
+      </section>
+
+      <section id="action" aria-label="What needs to change">
+        <h2>What Needs to Change</h2>
+        <p>
+          The water crisis is solvable. Not easily, and not quickly but the technology, the knowledge,
+          and most of the funding required already exist. What is missing is sustained political commitment
+          and the pressure of an informed public demanding it.
+        </p>
+        <h3>Infrastructure Investment</h3>
+        <p>
+          Boreholes, piped systems, rainwater harvesting, and solar-powered pumps are all proven
+          technologies. The Global Water Initiative estimates that ending the water crisis requires
+          roughly $114 billion per year in additional investment less than 0.1% of global GDP.
+        </p>
+        <h3>Sanitation Must Come With Water</h3>
+        <p>
+          SDG 6 covers both water and sanitation for a reason. Providing clean water without also
+          providing safe waste disposal simply moves the contamination problem. Both must be addressed together.
+        </p>
+        <h3>What You Can Do</h3>
+        <p>
+          You are a student at a university in a country with reliable water access. Your direct impact
+          on water infrastructure in Chad is limited but your indirect impact, through political
+          engagement, fundraising, and awareness, is real. Organisations like WaterAid, charity: water,
+          and UNICEF's WASH programmes have demonstrated that clean water access can be delivered
+          for as little as £20-£30 per person served.
+        </p>
+        <p style="margin-top: 28px;">
+          <a href="ais.html"     class="btn btn-primary">Take the Impact Simulator</a>
+          &nbsp;
+          <a href="gallery.html" class="btn btn-outline">View the Gallery</a>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+</main>
+<a href="#top" class="go-top" aria-label="Back to top of page" title="Back to top">&#8679;</a>
+<footer>
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG 6.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="ais.html">AIS</a>
+      <a href="profile.html">Profile</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="team.html">Team</a>
+      <a href="sitemap.html">Sitemap</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Team</h4>
+      <a href="pageEditor_ST1.html">Page Editor</a>
+      <a href="validation_ST1.html">Validation</a>
+      <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+    <div>Swosti Tamrakar | w2148847 | Student 1</div>
+    <div>Web Design &amp; Development</div>
+  </div>
+</footer>
+</body>
+</html>

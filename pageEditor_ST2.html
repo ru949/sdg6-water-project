@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Editor – Student 2 – ProjectBlue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #f5f8fc;
+      color: #1e2d40;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .editor-header {
+      background: #0b1a2c;
+      padding: 32px 48px;
+      border-bottom: 3px solid #1a9fd4;
+    }
+
+    .editor-header h1 {
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .editor-header p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+    }
+
+    .editor-header a { color: #5ec7f0; }
+
+    .editor-body {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    .contents-box {
+      background: #fff;
+      border: 1px solid #cce0ef;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .contents-box h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a9fd4;
+      margin-bottom: 12px;
+    }
+
+    .contents-box ol { padding-left: 20px; }
+    .contents-box li { margin-bottom: 6px; }
+
+    .contents-box a {
+      color: #0a3d55;
+      font-size: 0.88rem;
+      text-decoration: none;
+    }
+
+    .contents-box a:hover { text-decoration: underline; color: #1a9fd4; }
+
+    .editor-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(11,26,44,0.06);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+    }
+
+    .editor-section h2 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #0b1a2c;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0eef7;
+    }
+
+    .editor-section h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0a3d55;
+      margin: 20px 0 8px;
+    }
+
+    .editor-section p {
+      font-size: 0.88rem;
+      color: #3a4f6a;
+      margin-bottom: 12px;
+    }
+
+    .editor-section ul, .editor-section ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .editor-section li {
+      font-size: 0.86rem;
+      color: #3a4f6a;
+      margin-bottom: 6px;
+    }
+
+    .editor-section a { color: #1a9fd4; font-weight: 700; }
+    .editor-section a:hover { text-decoration: underline; }
+
+    .page-link-badge {
+      display: inline-block;
+      background: #0b1a2c;
+      color: #5ec7f0;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin: 8px 8px 8px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .page-link-badge:hover { background: #1a9fd4; color: #fff; }
+
+    .meetings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      margin-top: 12px;
+    }
+
+    .meetings-table th {
+      background: #0b1a2c;
+      color: rgba(255,255,255,0.80);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .meetings-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e0eef7;
+      color: #3a4f6a;
+      vertical-align: top;
+    }
+
+    .meetings-table tr:nth-child(even) td { background: #f5f8fc; }
+    .meetings-table tr:last-child td { border-bottom: none; }
+
+    code {
+      background: #eaf3fa;
+      color: #0a3d55;
+      font-size: 0.82rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .editor-footer {
+      background: #0b1a2c;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.78rem;
+    }
+
+    .editor-footer a { color: #5ec7f0; }
+
+    .back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #1a9fd4;
+      color: #fff;
+      padding: 8px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 100;
+    }
+
+    .back-top:hover { background: #0b1a2c; }
+  </style>
+</head>
+<body>
+
+<a id="top"></a>
+
+<div class="editor-header">
+  <h1>Page Editor – Student 2</h1>
+  <p>Divya Sapkota &nbsp;|&nbsp; w2158226 &nbsp;|&nbsp; Web Design &amp; Development &nbsp;|&nbsp;
+    <a href="home.html">ProjectBlue Website</a>
+  </p>
+</div>
+
+<div class="editor-body">
+
+  <div class="contents-box" role="navigation" aria-label="Page Editor contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview">1. Student Overview &amp; Completed Pages</a></li>
+      <li><a href="#splash-screen">2. Splash Screen – Entry Portal (splash.html)</a></li>
+      <li><a href="#content-page">3. Content Page – Dirty Water, Hidden Danger (content_ST2.html)</a></li>
+      <li><a href="#accessibility">4. Accessibility Considerations</a></li>
+      <li><a href="#compliance">5. JANET Compliance</a></li>
+      <li><a href="#challenges">6. Challenges &amp; Lessons Learned</a></li>
+      <li><a href="#meetings">7. Group Meetings &amp; Contribution Log</a></li>
+      <li><a href="#references">8. References</a></li>
+    </ol>
+  </div>
+
+  <section class="editor-section" id="overview" aria-labelledby="overview-h2">
+    <h2 id="overview-h2">1. Student Overview &amp; Completed Pages</h2>
+    <p><strong>Name:</strong> Divya Sapkota</p>
+    <p><strong>Student ID:</strong> w2158226</p>
+    <p><strong>Role:</strong> Student 2 – Splash Screen, Content Page, Page Editor, Validation</p>
+
+    <h3>Pages Implemented</h3>
+    <ul>
+      <li><code>splash.html</code> – Animated Site Entry Portal</li>
+      <li><code>content_ST2.html</code> – Content Page: Dirty Water, Hidden Danger</li>
+      <li><code>pageEditor_ST2.html</code> – This Page Editor</li>
+      <li><code>validation_ST2.html</code> – Validation Page</li>
+    </ul>
+
+    <a href="splash.html" class="page-link-badge" target="_blank">↗ splash.html</a>
+    <a href="content_ST2.html" class="page-link-badge" target="_blank">↗ content_ST2.html</a>
+    <a href="validation_ST2.html" class="page-link-badge" target="_blank">↗ validation_ST2.html</a>
+  </section>
+
+  <section class="editor-section" id="splash-screen" aria-labelledby="splash-h2">
+    <h2 id="splash-h2">2. Splash Screen – Entry Portal (splash.html)</h2>
+    <a href="splash.html" class="page-link-badge" target="_blank">↗ View Page</a>
+
+    <h3>Purpose &amp; Branding</h3>
+    <p>
+      The splash screen serves as the professional entry point for <strong>ProjectBlue</strong>. 
+      It reinforces the branding of UN SDG Goal 6 and provides the user with an immersive 
+      introduction before redirecting to the main content.
+    </p>
+
+    <h3>Technical Implementation</h3>
+    <ul>
+      <li><strong>Auto-Redirect:</strong> Uses <code>&lt;meta http-equiv="refresh" content="4;url=home.html"&gt;</code> to automatically navigate to the home page after 4 seconds.</li>
+      <li><strong>CSS Loading Animation:</strong> A custom-built <code>.loader-bar</code> using CSS <code>@keyframes</code> synchronized with the 4-second redirect timer. This replaces the need for a heavy GIF.</li>
+      <li><strong>Typography &amp; Palette:</strong> Utilizes the <em>Lato</em> font family and the ProjectBlue dark navy/accent blue color scheme for visual consistency.</li>
+      <li><strong>JavaScript Countdown:</strong> A <code>setInterval</code> function updates the <code>#timer</code> element in real-time, providing visual feedback to the user.</li>
+      <li><strong>Skip Functionality:</strong> A "Skip Intro" button allows users to bypass the animation immediately, improving user experience for returning visitors.</li>
+    </ul>
+
+    <h3>Accessibility</h3>
+    <p>
+      The splash screen includes <code>aria-live="polite"</code> on the countdown timer so screen 
+      readers announce the remaining time. Descriptive <code>aria-label</code> attributes are 
+      used on the skip button and the SDG badge to ensure the page's purpose is clear to all users.
+    </p>
+  </section>
+
+  <section class="editor-section" id="content-page" aria-labelledby="content-h2">
+    <h2 id="content-h2">3. Content Page – Dirty Water, Hidden Danger (content_ST2.html)</h2>
+    <a href="content_ST2.html" class="page-link-badge" target="_blank">↗ View Page</a>
+    <a href="validation_ST2.html" class="page-link-badge" target="_blank">↗ Validation Evidence</a>
+
+    <h3>HTML Structure</h3>
+    <p>
+      The page uses the shared HTML template structure provided by Student 1, with a
+      <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>. Inside
+      <code>&lt;main&gt;</code>, the content is organised into distinct semantic regions:
+    </p>
+    <ul>
+      <li>A full-width dark editorial hero banner (<code>.content-hero</code>) with breadcrumb, page title, byline, and introduction paragraph</li>
+      <li>A sticky internal navigation bar (<code>&lt;nav class="content-nav"&gt;</code>) with anchor links to each of the five content sections</li>
+      <li>A white content body area (<code>.content-body</code>) containing five <code>&lt;section&gt;</code> elements, each with a unique <code>id</code> attribute matching the internal nav anchors</li>
+    </ul>
+    <p>
+      The five content sections are: <em>What Is Contaminated Water?</em>, <em>Health Effects</em>,
+      <em>Key Waterborne Diseases</em>, <em>Who Is Most Affected?</em>, and <em>What You Can Do</em>.
+      Each section uses a consistent structure of <code>&lt;h2&gt;</code> headings, <code>&lt;h3&gt;</code>
+      subheadings, body paragraphs, and supporting visual elements.
+    </p>
+    <ul>
+      <li>One <code>&lt;h1&gt;</code> used in the hero banner for the page title — no other <code>&lt;h1&gt;</code> appears on the page</li>
+      <li><code>&lt;h2&gt;</code> headings mark each of the five major sections</li>
+      <li><code>&lt;h3&gt;</code> headings introduce subsections (e.g. "Acute Health Effects", "Chronic Health Effects")</li>
+      <li>All four images include descriptive <code>alt</code> attributes and are followed by <code>&lt;p class="img-caption"&gt;</code> captions</li>
+      <li>A two-column image layout uses a <code>&lt;div class="img-pair"&gt;</code> wrapper with float-based CSS layout</li>
+      <li>Three stat callout boxes (<code>&lt;div class="stat-callout"&gt;</code>) highlight key statistics with large numerals</li>
+      <li>The waterborne diseases section uses a fully structured <code>&lt;table&gt;</code> with <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>scope="col"</code> on all header cells</li>
+      <li>A fixed "Go to Top" button uses <code>href="#top"</code> pointing to a named anchor at the document start</li>
+    </ul>
+
+    <h3>CSS Techniques</h3>
+    <p>
+      All page-specific styles are contained within an embedded <code>&lt;style&gt;</code> block in the
+      <code>&lt;head&gt;</code> of <code>content_ST2.html</code>, as required by the coursework specification.
+      The global <code>style.css</code> file provides the shared header, footer, typography base, and CSS custom
+      properties (variables). The embedded CSS adds the following page-specific styles:
+    </p>
+    <ul>
+      <li>
+        <strong>Content hero (<code>.content-hero</code>):</strong> Dark navy background (<code>#0a1628</code>)
+        with padding, a bottom border accent, breadcrumb styling, large bold <code>h1</code> with an
+        <code>&lt;em&gt;</code> accent colour, and a semi-transparent intro paragraph.
+      </li>
+      <li>
+        <strong>Sticky internal navigation (<code>.content-nav</code>):</strong> Uses
+        <code>position: sticky; top: 0;</code> with <code>z-index: 50</code> to remain fixed at the top
+        of the viewport during scroll. A <code>flex</code> layout with <code>flex-wrap: wrap</code> allows
+        nav items to reflow on smaller screens. On mobile, <code>flex-wrap: nowrap</code> and
+        <code>overflow-x: auto</code> create a horizontally scrollable strip.
+      </li>
+      <li>
+        <strong>Content sections (<code>.content-section</code>):</strong> Centred with
+        <code>max-width: 860px</code> and <code>margin: 0 auto</code>. Sections are separated by a
+        bottom border (<code>1px solid #e8f0f7</code>), removed on the last section using
+        <code>:last-of-type</code>.
+      </li>
+      <li>
+        <strong>Images and captions:</strong> <code>.content-img</code> is full-width with a light border
+        and box shadow. <code>.img-caption</code> uses italic styling, small font size, and centred alignment.
+        The <code>.img-pair</code> two-column layout uses <code>float: left</code> with
+        <code>calc(50% - 10px)</code> width for each image, and <code>overflow: hidden</code> on the
+        wrapper to contain floats.
+      </li>
+      <li>
+        <strong>Stat callout boxes (<code>.stat-callout</code>):</strong> Dark navy background with a
+        4px left border in the accent colour (<code>var(--accent-light)</code>). The large statistic
+        figure (<code>.big-stat</code>) uses a 3rem font size in the accent blue.
+      </li>
+      <li>
+        <strong>Disease table (<code>.disease-table</code>):</strong> Full-width with collapsed borders.
+        Header row uses dark navy background with accent-coloured text and uppercase letter-spacing.
+        Alternating row background applied using <code>tr:nth-child(even) td</code>.
+      </li>
+      <li>
+        <strong>Go to Top button (<code>.go-top</code>):</strong> Fixed position at bottom-right using
+        <code>position: fixed; bottom: 32px; right: 32px;</code> with a hover colour transition.
+      </li>
+      <li>
+        <strong>Responsive breakpoint:</strong> A single <code>@media (max-width: 680px)</code> rule
+        reduces the hero <code>h1</code> font size, stacks image pairs vertically, and makes the
+        content nav horizontally scrollable.
+      </li>
+    </ul>
+
+    <h3>Content Summary</h3>
+    <p>
+      The page covers five thematic sections focused on SDG 6 – Clean Water and Sanitation. The content
+      investigates the sources and types of water contamination, the acute and chronic health effects of
+      unsafe water, a structured overview of key waterborne diseases (cholera, typhoid, hepatitis A,
+      arsenicosis, schistosomiasis), the populations most affected (children under five, women and girls,
+      conflict-affected communities), and concrete actions individuals can take. All content is original,
+      written specifically for this project. Statistics are sourced from WHO and UNICEF publications and
+      are cited in the References section. A link to the Action Impact Simulator (<code>ais.html</code>)
+      is provided at the end of the final section.
+    </p>
+
+    <h3>Design Rationale</h3>
+    <p>
+      The dark editorial hero was chosen to create a strong visual contrast with the clean white content
+      body below, reinforcing the serious, documentary tone of the subject matter. The sticky internal
+      navigation bar allows users to jump between sections on a long-form page without losing their position.
+      Stat callout boxes break up prose-heavy sections and draw attention to the most impactful data points.
+      The float-based image pair layout was kept consistent with the shared <code>style.css</code> conventions
+      used across the site, avoiding the need for a separate flex or grid context that might conflict with
+      global styles.
+    </p>
+  </section>
+
+  <section class="editor-section" id="accessibility" aria-labelledby="access-h2">
+    <h2 id="access-h2">4. Accessibility Considerations</h2>
+    <p>
+      Accessibility was considered throughout the design and implementation of
+      <code>content_ST2.html</code>. The following techniques were applied to meet WCAG 2.1 Level AA
+      requirements:
+    </p>
+
+    <h3>Semantic HTML</h3>
+    <p>
+      All structural elements use semantic HTML5: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+      <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;footer&gt;</code>. This
+      provides meaningful document structure for screen readers and assistive technologies without
+      relying on visual presentation alone.
+    </p>
+
+    <h3>Heading Hierarchy</h3>
+    <p>
+      A single <code>&lt;h1&gt;</code> appears in the hero banner. All five content sections use
+      <code>&lt;h2&gt;</code>, and subsections within those sections use <code>&lt;h3&gt;</code>. No
+      heading levels are skipped, ensuring a logical outline for screen reader navigation.
+    </p>
+
+    <h3>Alternative Text</h3>
+    <p>
+      Every <code>&lt;img&gt;</code> element includes a descriptive <code>alt</code> attribute that
+      explains both the content and the context of the image — not just a filename. For example, the
+      image pair includes distinct alt text for each: the cholera microscope image and the child drinking
+      from an unsafe source.
+    </p>
+
+    <h3>ARIA Attributes</h3>
+    <ul>
+      <li><code>aria-label</code> used on both <code>&lt;nav&gt;</code> elements to distinguish the main site navigation from the internal page section navigation</li>
+      <li><code>aria-label</code> applied to all five <code>&lt;section&gt;</code> elements describing their content</li>
+      <li><code>aria-label="Key statistic"</code> on each stat callout box so screen readers announce its purpose</li>
+      <li><code>aria-label</code> on the waterborne disease <code>&lt;table&gt;</code> providing a full description of its contents</li>
+      <li><code>aria-label="Go back to the top of the page"</code> on the fixed "Go to Top" anchor button</li>
+      <li><code>aria-hidden="true"</code> on the decorative top anchor (<code>&lt;a id="top"&gt;</code>) to prevent it being announced as a link</li>
+      <li><code>aria-label</code> on the image pair <code>&lt;div&gt;</code> to provide context for the two images</li>
+    </ul>
+
+    <h3>Table Accessibility</h3>
+    <p>
+      The disease data table uses <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> to separate
+      header and data rows. All four column headers use <code>scope="col"</code> to associate them
+      correctly with their respective columns for screen reader users. The table carries an
+      <code>aria-label</code> attribute describing its full purpose.
+    </p>
+
+    <h3>Colour and Contrast</h3>
+    <p>
+      The white text and accent blue (<code>#5ec4f0</code>) used on the dark navy backgrounds
+      (<code>#0a1628</code>, <code>#0c1c2e</code>) meet the WCAG AA contrast ratio requirement of
+      4.5:1 for normal text. Body text (<code>#3a5166</code>) on the white content area also meets
+      the minimum contrast threshold.
+    </p>
+
+    <h3>Keyboard Navigation</h3>
+    <p>
+      All interactive elements — links, the internal nav, and the "Go to Top" button — are native
+      HTML anchor elements and are therefore natively keyboard focusable. The internal navigation
+      allows keyboard users to skip directly to any section. The sticky nav remains accessible at
+      all times during scroll.
+    </p>
+  </section>
+
+  <section class="editor-section" id="compliance" aria-labelledby="compliance-h2">
+    <h2 id="compliance-h2">5. JANET Compliance</h2>
+    <p>
+      All pages created for this coursework comply with JANET (Joint Academic Network) regulations
+      governing the publication of web content on university servers. The following principles were
+      observed:
+    </p>
+
+    <h3>Appropriate and Ethical Content</h3>
+    <p>
+      All content on <code>content_ST2.html</code> is factual, educational, and directly relevant
+      to the SDG 6 theme of clean water and sanitation. Statistics are drawn from credible international
+      sources — the World Health Organisation and UNICEF — and are presented accurately. The page does
+      not sensationalise poverty, suffering, or crisis, but presents data objectively and constructively,
+      ending with actionable guidance for the reader.
+    </p>
+
+    <h3>Responsible Use of External Resources</h3>
+    <p>
+      The page links internally to <code>ais.html</code> (the Action Impact Simulator). No external
+      third-party scripts or tracking services are embedded. The Google Fonts API is used only for
+      loading the Lato typeface, consistent with the shared site template. Images use local file paths
+      and are intended to be royalty-free resources from iStockPhoto.
+    </p>
+
+    <h3>Academic Integrity</h3>
+    <p>
+      All HTML and CSS code was written independently by Student 2. No pre-made templates from the
+      internet were used. The shared global CSS (<code>style.css</code>) and HTML template structure
+      provided by Student 1 were used as agreed by the team and were not modified. All page-specific
+      styles are clearly contained in the embedded <code>&lt;style&gt;</code> block within
+      <code>content_ST2.html</code> only.
+    </p>
+
+    <h3>Privacy</h3>
+    <p>
+      The content page does not collect, store, or transmit any personal data. There are no forms,
+      cookies, or analytics scripts on this page. The page is entirely static HTML and CSS.
+    </p>
+  </section>
+
+  <section class="editor-section" id="challenges" aria-labelledby="challenges-h2">
+    <h2 id="challenges-h2">6. Challenges &amp; Lessons Learned</h2>
+
+    <h3>Challenge 1: Sticky Navigation Bar Conflicting with Scroll Position</h3>
+    <p>
+      The internal navigation bar uses <code>position: sticky; top: 0;</code> to remain visible as
+      the user scrolls. An initial problem arose where the sticky nav would overlap section headings
+      when an anchor link was clicked — the browser would scroll the target section to the very top
+      of the viewport, placing the heading behind the nav bar. This was resolved by adjusting the
+      <code>z-index</code> of the nav (<code>z-index: 50</code>) and adding
+      <code>position: -webkit-sticky;</code> for Safari compatibility, ensuring the nav displays
+      correctly across all tested browsers.
+    </p>
+
+    <h3>Challenge 2: Float Clearance in the Image Pair Layout</h3>
+    <p>
+      The two-column <code>.img-pair</code> layout uses CSS floats (<code>float: left</code>) to
+      place two images side by side. Without a clearfix solution, the parent <code>&lt;div&gt;</code>
+      would collapse to zero height because floated elements are removed from normal document flow.
+      The fix was to add <code>overflow: hidden</code> to the <code>.img-pair</code> container,
+      which forces the parent to expand to contain its floated children. This is a well-established
+      clearfix technique that avoids adding extra markup.
+    </p>
+
+    <h3>Challenge 3: Keeping Embedded CSS Scoped to This Page Only</h3>
+    <p>
+      Because <code>content_ST2.html</code> embeds a <code>&lt;style&gt;</code> block that targets
+      elements like <code>h2</code> and <code>p</code>, there was a risk of those rules conflicting
+      with the global styles from <code>style.css</code> if selectors were not specific enough. This
+      was managed by always scoping embedded rules to a parent class — for example,
+      <code>.content-section h2</code> rather than a bare <code>h2</code> — so that the embedded
+      styles only affect elements within the content body and do not bleed into the shared header
+      or footer.
+    </p>
+
+    <h3>Lessons Learned</h3>
+    <ul>
+      <li>Defining section IDs and anchor links before writing any CSS made the internal navigation trivial to implement and test.</li>
+      <li>Testing the page at mobile widths early (using Chrome DevTools) revealed the image pair overflow issue before it became a larger layout problem.</li>
+      <li>Writing comments in the embedded CSS to label each numbered section (matching the specification's required CSS technique list) made the final review and validation process significantly faster.</li>
+      <li>Using CSS custom properties (<code>var(--accent-light)</code>) from the global stylesheet throughout the embedded styles kept colour consistency without hardcoding values in multiple places.</li>
+    </ul>
+  </section>
+
+  <section class="editor-section" id="meetings" aria-labelledby="meetings-h2">
+    <h2 id="meetings-h2">7. Group Meetings &amp; Contribution Log</h2>
+    <p>A minimum of six group meetings were held across the project. My individual contributions are documented below.</p>
+
+    <table class="meetings-table" aria-label="Group meeting log">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date &amp; Time</th>
+          <th>Format</th>
+          <th>Objective</th>
+          <th>Attended</th>
+          <th>My Individual Contribution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2026-03-27</td>
+          <td>Face-to-face</td>
+          <td>Agree SDG, assign roles, agree folder structure</td>
+          <td>Yes</td>
+          <td>Agreed to take Student 2 responsibilities: Content Page, Page Editor, Validation. Contributed to choosing SDG 6 and the water crisis focus. Agreed on the shared folder and file naming convention.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>2026-03-28</td>
+          <td>Online (Teams)</td>
+          <td>Review shared template and global CSS from Student 1</td>
+          <td>Yes</td>
+          <td>Reviewed the shared template and confirmed CSS custom property names (<code>--accent-light</code>, <code>--white</code>) that my embedded styles would reference. Flagged the need for an internal sticky navigation on long content pages.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>2026-03-29</td>
+          <td>Online (Teams)</td>
+          <td>Progress check – first drafts</td>
+          <td>Yes</td>
+          <td>Shared draft <code>content_ST2.html</code> with the group for review. Discussed the disease table structure and stat callout box design. Received feedback on hero section contrast.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>2026-03-30</td>
+          <td>Face-to-face</td>
+          <td>Content review and consistency check</td>
+          <td>Yes</td>
+          <td>Presented the five-section structure and confirmed topic coverage with the group. Agreed on the "What You Can Do" final section linking to the Action Impact Simulator. Confirmed image placeholder naming with Student 1.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>2026-03-31</td>
+          <td>Hybrid</td>
+          <td>Accessibility and validation review</td>
+          <td>Yes</td>
+          <td>Ran HTML and CSS validation on <code>content_ST2.html</code>. Fixed the broken breadcrumb link (<code>href="1.jpg"</code> → <code>href="home.html"</code>). Added missing <code>aria-label</code> to the image pair div and corrected the empty alt attribute on image 9.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>2026-04-01</td>
+          <td>Online (Teams)</td>
+          <td>Final review and submission preparation</td>
+          <td>Yes</td>
+          <td>Completed <code>pageEditor_ST2.html</code> and <code>validation_ST2.html</code>. Confirmed all internal anchor links work correctly. Uploaded files to the university server and verified all navigation links across the full site.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="editor-section" id="references" aria-labelledby="refs-h2">
+    <h2 id="refs-h2">8. References</h2>
+    <p>The following resources were consulted in the development of these pages:</p>
+
+    <h3>Lecture Notes and Module Materials</h3>
+    <ul>
+      <li>Economou, D. (2025/26). <em>4COSC011W Web Design and Development – Lecture Notes</em>. University of Westminster.</li>
+    </ul>
+
+    <h3>External Technical References</h3>
+    <ul>
+      <li>MDN Web Docs (2025). <em>HTML Reference – Tables, Sections, ARIA</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/en-US/docs/Web/HTML</a></li>
+      <li>MDN Web Docs (2025). <em>CSS Position: Sticky</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/en-US/docs/Web/CSS/position</a></li>
+      <li>MDN Web Docs (2025). <em>CSS Floats</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/en-US/docs/Web/CSS/float</a></li>
+      <li>W3C (2025). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. Available at: <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener noreferrer">https://www.w3.org/WAI/WCAG21/quickref/</a></li>
+    </ul>
+
+    <h3>Content Sources</h3>
+    <ul>
+      <li>World Health Organisation (2023). <em>Drinking Water – Key Facts</em>. Available at: <a href="https://www.who.int/news-room/fact-sheets/detail/drinking-water" target="_blank" rel="noopener noreferrer">https://www.who.int</a></li>
+      <li>WHO/UNICEF Joint Monitoring Programme (2023). <em>Progress on Household Drinking Water, Sanitation and Hygiene 2000–2022</em>. Available at: <a href="https://www.who.int/teams/environment-climate-change-and-health/water-sanitation-and-health/monitoring-and-evidence/wash-statistics" target="_blank" rel="noopener noreferrer">https://www.who.int</a></li>
+      <li>UNICEF (2023). <em>Water, Sanitation and Hygiene (WASH)</em>. Available at: <a href="https://www.unicef.org/wash" target="_blank" rel="noopener noreferrer">https://www.unicef.org/wash</a></li>
+      <li>WaterAid (2024). <em>About WaterAid</em>. Available at: <a href="https://www.wateraid.org" target="_blank" rel="noopener noreferrer">https://www.wateraid.org</a></li>
+      <li>UN SDG 6 (2024). <em>Sustainable Development Goal 6: Clean Water and Sanitation</em>. Available at: <a href="https://sdgs.un.org/goals/goal6" target="_blank" rel="noopener noreferrer">https://sdgs.un.org/goals/goal6</a></li>
+    </ul>
+
+    <h3>Image Sources</h3>
+    <p>All images used on Student 2 pages are royalty-free resources sourced from iStockPhoto
+      (<a href="https://www.istockphoto.com" target="_blank" rel="noopener noreferrer">https://www.istockphoto.com</a>).
+      Placeholder filenames (<code>7.jpeg</code>, <code>8.jpg</code>, <code>9.jpg</code>, <code>10.jpg</code>, <code>12.jpg</code>)
+      are used throughout the code and will be replaced with properly licensed images before submission.
+    </p>
+  </section>
+
+</div>
+
+<div class="editor-footer">
+  <p>Divya Sapkota | w2158226 | Student 2 | Web Design &amp; Development &copy; 2026 ProjectBlue</p>
+  <p>
+    <a href="validation_ST2.html">Validation Page</a> &nbsp;|&nbsp;
+    <a href="home.html">Back to Website</a>
+  </p>
+</div>
+
+<a href="#top" class="back-top" aria-label="Back to top of page">↑ Top</a>
+
+</body>
+</html>

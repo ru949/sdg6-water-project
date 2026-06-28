@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dirty Water, Hidden Danger – ProjectBlue</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- CONTENT PAGE ST2 – Embedded CSS (content_ST2.html only)
+       Page-specific styles only. Does NOT override global CSS. -->
+  <style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* 1. CONTENT PAGE HERO – editorial, dark, full-width banner */
+    .content-hero {
+      background-color: #0a1628;
+      padding: 80px 28px 60px;
+      border-bottom: 1px solid rgba(94, 196, 240, 0.12);
+    }
+
+    .content-hero .breadcrumb {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 22px;
+    }
+
+    .content-hero .breadcrumb a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    .content-hero h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.18;
+      max-width: 680px;
+      margin-bottom: 18px;
+    }
+
+    .content-hero h1 em {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .content-hero .hero-byline {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.38);
+      margin-bottom: 22px;
+    }
+
+    .content-hero .hero-intro {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* 2. INTERNAL NAVIGATION MENU – sticky side or top list of links */
+    .content-nav {
+      background-color: #0f1e33;
+      border-bottom: 1px solid rgba(94, 196, 240, 0.12);
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .content-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .content-nav ul li a {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      padding: 16px 18px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .content-nav ul li a:hover {
+      color: var(--accent-light);
+      border-bottom-color: var(--accent-light);
+    }
+
+    /* 3. CONTENT BODY AREA – light background, readable prose */
+    .content-body {
+      background-color: #ffffff;
+    }
+
+    .content-section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 28px;
+      border-bottom: 1px solid #e8f0f7;
+    }
+
+    .content-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .content-section h2 {
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: #0c1c2e;
+      margin-bottom: 18px;
+    }
+
+    .content-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0c1c2e;
+      margin: 32px 0 10px;
+    }
+
+    .content-section p {
+      font-size: 0.97rem;
+      color: #3a5166;
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    /* 4. CONTENT IMAGES – styled with borders and spacing */
+    .content-img {
+      width: 100%;
+      display: block;
+      margin: 28px 0;
+      border: 1px solid #dde8f0;
+      box-shadow: 0 4px 18px rgba(12, 28, 46, 0.07);
+    }
+
+    /* Image caption */
+    .img-caption {
+      font-size: 0.72rem;
+      color: #8aa3b6;
+      text-align: center;
+      margin-top: -18px;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    /* Two-column image layout for mid-section */
+    .img-pair {
+      overflow: hidden;
+      margin: 28px 0;
+    }
+
+    .img-pair img {
+      float: left;
+      width: calc(50% - 10px);
+      margin-right: 20px;
+      border: 1px solid #dde8f0;
+      box-shadow: 0 4px 14px rgba(12, 28, 46, 0.06);
+    }
+
+    .img-pair img:last-child {
+      margin-right: 0;
+    }
+
+    /* 5. STAT CALLOUT BOX – highlighted fact block */
+    .stat-callout {
+      background-color: #0c1c2e;
+      color: var(--white);
+      padding: 32px 36px;
+      margin: 32px 0;
+      border-left: 4px solid var(--accent-light, #5ec4f0);
+    }
+
+    .stat-callout .big-stat {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #5ec4f0;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-callout p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* 6. DISEASE TABLE – clean tabular data styling */
+    .disease-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-size: 0.85rem;
+    }
+
+    .disease-table th {
+      background-color: #0c1c2e;
+      color: #5ec4f0;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .disease-table td {
+      padding: 12px 16px;
+      color: #3a5166;
+      border-bottom: 1px solid #e8f0f7;
+    }
+
+    .disease-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .disease-table tr:nth-child(even) td {
+      background-color: #f7fbfe;
+    }
+
+    /* 7. GO TO TOP BUTTON – fixed, always visible */
+    .go-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background-color: #1a6fa4;
+      color: #ffffff;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 14px;
+      z-index: 100;
+      transition: background-color 0.2s;
+    }
+
+    .go-top:hover {
+      background-color: #5ec4f0;
+      color: #0c1c2e;
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      .content-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .img-pair img {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        margin-bottom: 14px;
+      }
+
+      .content-nav ul {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Anchor for Go to Top button -->
+  <a id="top" tabindex="-1" aria-hidden="true"></a>
+
+  <!-- HEADER – copied from shared template (Student 1).
+     Only change: no active class on nav links (content pages don't match nav items). -->
+  <header>
+    <nav>
+      <a href="home.html" class="logo">
+        <img src="logo.png" alt="ProjectBlue logo">
+        <span class="logo-text">ProjectBlue</span>
+      </a>
+      <ul class="nav-links" aria-label="Main navigation">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="ais.html">AIS</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sitemap.html">Sitemap</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+  
+
+
+
+
+
+
+    <!-- PAGE HERO -->
+    <section class="content-hero" aria-label="Page introduction">
+      <div class="container">
+        <p class="breadcrumb">
+          <a href="home.html">Home</a> &nbsp;/&nbsp; Water Quality
+        </p>
+        <h1>Dirty Water,<br><em>Hidden Danger</em></h1>
+        <p class="hero-byline">
+          Divya Sapkota &nbsp;|&nbsp; Student 2 &nbsp;|&nbsp; ProjectBlue &nbsp;|&nbsp; SDG 6
+        </p>
+        <p class="hero-intro">
+          Contaminated water is the world's single largest environmental health risk. Each year,
+          unsafe water kills more people than war, violence, and all other forms of human conflict
+          combined. This page investigates what makes water dangerous, which diseases it carries,
+          and what individuals can do to protect themselves and their communities.
+        </p>
+      </div>
+    </section>
+
+    <!-- INTERNAL NAVIGATION MENU (required for long pages) -->
+    <nav class="content-nav" aria-label="Page sections navigation">
+      <ul>
+        <li><a href="#what-is-contaminated-water">What Is Contaminated Water?</a></li>
+        <li><a href="#health-effects">Health Effects</a></li>
+        <li><a href="#diseases">Waterborne Diseases</a></li>
+        <li><a href="#who-is-affected">Who Is Most Affected?</a></li>
+        <li><a href="#what-you-can-do">What You Can Do</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTENT BODY -->
+    <div class="content-body">
+
+      <!-- SECTION 1 – What Is Contaminated Water? -->
+      <section class="content-section" id="what-is-contaminated-water"
+        aria-label="Section: What is contaminated water?">
+        <h2>What Is Contaminated Water?</h2>
+        <p>
+          Water becomes contaminated when harmful substances enter natural water sources faster than
+          they can be diluted or broken down. Contamination takes many forms: biological (bacteria,
+          viruses, parasites), chemical (heavy metals, pesticides, industrial discharge), physical
+          (sediment, microplastics), and radiological. In low-income regions, biological contamination
+          is most deadly, but chemical contamination from mining or agriculture is rising rapidly.
+        </p>
+        <p>
+          The World Health Organisation defines safe drinking water as water that does not represent
+          any significant risk to health over a lifetime of consumption. By that definition, an estimated
+          2 billion people worldwide are currently drinking unsafe water every single day.
+        </p>
+
+        <!-- Image 1 – replace with royalty-free image -->
+        <img class="content-img" src="8.jpg"
+          alt="A river visibly polluted with industrial discharge and floating debris in a low-income urban area">
+        <p class="img-caption">
+          Polluted river water in a densely populated region — one of billions of daily water sources for people without
+          alternatives.
+        </p>
+
+        <h3>The Main Sources of Contamination</h3>
+        <p>
+          Open defecation near water sources introduces dangerous faecal pathogens. Agricultural runoff
+          carries nitrates, pesticides, and animal waste. Industrial sites discharge heavy metals including
+          lead, arsenic, and mercury. In urban slums, crumbling pipes allow sewage to seep into drinking
+          water supply lines. These sources rarely act in isolation — most contaminated water sources
+          contain multiple types of pollutants simultaneously.
+        </p>
+
+        <div class="stat-callout" role="region" aria-label="Key statistic">
+          <div class="big-stat">2 Billion</div>
+          <p>
+            people globally consume water contaminated with faeces every day, according to the WHO/UNICEF
+            Joint Monitoring Programme for Water Supply, Sanitation and Hygiene (2023).
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 2 – Health Effects -->
+      <section class="content-section" id="health-effects" aria-label="Section: Health effects of contaminated water">
+        <h2>Health Effects of Contaminated Water</h2>
+        <p>
+          The health consequences of contaminated water range from acute illness — diarrhoea that kills
+          within hours — to chronic, long-term conditions that develop silently over years. Both are
+          devastating, and both disproportionately affect the world's poorest communities.
+        </p>
+
+        <!-- Image 2 -->
+        <img class="content-img" src="9.jpg" alt="A healthcare worker using a stethoscope to examine a young child at a community clinic, while caregivers stand nearby, highlighting access to basic medical care.
+">
+        <p class="img-caption">
+          Polluted river water in a densely populated region — one of billions of daily water sources for people without
+          alternatives.
+        </p>
+
+        <h3>Acute Health Effects</h3>
+        <p>
+          The most immediate and visible impact is severe diarrhoea, caused by pathogens like
+          <em>E. coli</em>, <em>Salmonella</em>, <em>Vibrio cholerae</em>, and rotavirus. Children under five are
+          most vulnerable: their immune systems cannot fight off infection and dehydration can become
+          fatal within hours without medical intervention. Globally, diarrhoeal disease kills approximately
+          1.4 million children under five each year — the vast majority from contaminated water.
+        </p>
+        <p>
+          Hepatitis A and E, transmitted through contaminated water and food, cause acute liver inflammation.
+          Outbreaks can sweep through entire communities in days, overwhelming fragile health systems.
+        </p>
+
+        <h3>Chronic Health Effects</h3>
+        <p>
+          Chemical contamination causes harm that accumulates slowly. Arsenic in groundwater — a widespread
+          problem across South and Southeast Asia — causes skin lesions, cancers of the bladder and lungs,
+          and cardiovascular disease after years of exposure. Fluoride contamination causes dental and
+          skeletal fluorosis, leading to painful deformity. Lead exposure — even at very low levels — causes
+          permanent neurological damage in children, reducing IQ and impairing cognitive development.
+        </p>
+        <p>
+          These chronic conditions are often invisible to global health statistics because the connection
+          between contaminated water and illness develops over years, not days.
+        </p>
+
+        <div class="stat-callout" role="region" aria-label="Key statistic">
+          <div class="big-stat">485,000</div>
+          <p>
+            deaths occur each year from diarrhoea alone caused by contaminated drinking water.
+            This is equivalent to one person dying every 64 seconds from a preventable cause.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 3 – Waterborne Diseases -->
+      <section class="content-section" id="diseases" aria-label="Section: Waterborne diseases table">
+        <h2>Key Waterborne Diseases</h2>
+        <p>
+          The table below summarises the most prevalent and deadly waterborne diseases, their causes,
+          regions most affected, and estimated annual burden. These are not historical diseases — they
+          are active, ongoing crises.
+        </p>
+
+        <table class="disease-table" aria-label="Waterborne diseases, causes, affected regions and annual deaths">
+          <thead>
+            <tr>
+              <th scope="col">Disease</th>
+              <th scope="col">Cause</th>
+              <th scope="col">Regions Most Affected</th>
+              <th scope="col">Annual Deaths (est.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cholera</td>
+              <td>Vibrio cholerae bacterium</td>
+              <td>Sub-Saharan Africa, South Asia, Haiti</td>
+              <td>95,000 – 130,000</td>
+            </tr>
+            <tr>
+              <td>Typhoid Fever</td>
+              <td>Salmonella Typhi</td>
+              <td>South Asia, East Africa, Southeast Asia</td>
+              <td>128,000 – 161,000</td>
+            </tr>
+            <tr>
+              <td>Diarrhoeal Disease</td>
+              <td>Multiple pathogens (E. coli, rotavirus, etc.)</td>
+              <td>Global (highest in LMICs)</td>
+              <td>~1.4 million (under-5s)</td>
+            </tr>
+            <tr>
+              <td>Hepatitis A</td>
+              <td>Hepatitis A virus</td>
+              <td>South Asia, Sub-Saharan Africa, MENA</td>
+              <td>7,134</td>
+            </tr>
+            <tr>
+              <td>Arsenicosis</td>
+              <td>Arsenic in groundwater (chemical)</td>
+              <td>Bangladesh, India, Cambodia, Vietnam</td>
+              <td>Long-term cancer mortality</td>
+            </tr>
+            <tr>
+              <td>Schistosomiasis</td>
+              <td>Parasitic worms in freshwater</td>
+              <td>Sub-Saharan Africa</td>
+              <td>11,700 – 200,000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Image pair -->
+        <section class="img-pair" aria-label="Images relating to waterborne disease"></section>
+        <img src="7.jpeg" alt="Microscope view of Vibrio cholerae bacteria, the cause of cholera">
+        <img src="10.jpg"
+          alt="A child drinking from a contaminated stream in a rural area, illustrating the risk of waterborne disease">
+        <p class="img-caption">Left: Cholera bacteria under microscope. Right: A child drinking from an unsafe water
+          source.</p>
+      </section>
+
+      <!-- SECTION 4 – Who Is Most Affected? -->
+      <section class="content-section" id="who-is-affected"
+        aria-label="Section: Who is most affected by contaminated water?">
+        <h2>Who Is Most Affected?</h2>
+        <p>
+          Water contamination does not affect everyone equally. The burden falls most heavily on specific
+          groups whose circumstances make them least able to avoid contaminated sources or access treatment.
+        </p>
+
+        <h3>Children Under Five</h3>
+        <p>
+          Children's immune systems are not fully developed, making them far more susceptible to the
+          pathogens found in dirty water. They also consume proportionally more water relative to body
+          weight, increasing their exposure. Malnutrition — itself linked to poor water quality and sanitation
+          — compounds their vulnerability, creating a lethal cycle.
+        </p>
+
+        <h3>Women and Girls</h3>
+        <p>
+          In households without piped water access, women and girls are primarily responsible for water
+          collection. Studies across Sub-Saharan Africa show women spend an average of six hours per day
+          walking to and from water sources. This time cost directly reduces school attendance and economic
+          opportunity. The physical act of carrying heavy water containers also causes chronic musculoskeletal
+          injury. Crucially, the sources they reach are rarely safe.
+        </p>
+
+        <h3>Communities in Conflict or Post-Disaster Settings</h3>
+        <p>
+          When infrastructure is damaged by conflict, flooding, or earthquake, water treatment systems
+          collapse rapidly. Cholera outbreaks following the 2010 Haiti earthquake and in war-affected Yemen
+          demonstrate how quickly safe water access can disintegrate — and how the consequences compound
+          across already-fragile health systems.
+        </p>
+
+        <img class="content-img" src="12.jpg"
+          alt="Women and children in rural Sub-Saharan Africa walking long distances carrying yellow water containers">
+        <p class="img-caption">
+          Women and children bear the physical and time burden of water collection across much of Sub-Saharan Africa.
+        </p>
+      </section>
+
+      <!-- SECTION 5 – What You Can Do -->
+      <section class="content-section" id="what-you-can-do" aria-label="Section: What individuals can do">
+        <h2>What You Can Do</h2>
+        <p>
+          The scale of the water crisis can feel overwhelming, but individual and collective action genuinely
+          matters. Below are concrete steps that students and citizens in any country can take to contribute
+          to SDG 6 — whether directly or through advocacy and awareness.
+        </p>
+
+        <h3>Reduce Your Own Water Footprint</h3>
+        <p>
+          In the UK, the average person uses around 150 litres of water per day. Fixing a dripping tap,
+          switching to a low-flow showerhead, and not running the tap while brushing teeth can collectively
+          save tens of thousands of litres per year. This matters because global freshwater resources are
+          finite — conservation in wealthy nations reduces pressure on shared global supplies.
+        </p>
+
+        <h3>Support Organisations Working on the Ground</h3>
+        <p>
+          Organisations like Water Aid, Charity: Water, and the IRC have demonstrated, evidence-based models
+          for delivering clean water access to communities in crisis. Even small donations fund lasting
+          infrastructure. Critically, the most effective programmes combine water infrastructure with hygiene
+          education and sanitation — addressing the full cycle of contamination.
+        </p>
+
+        <h3>Advocate for Policy Change</h3>
+        <p>
+          Water is a human right, recognised by the United Nations in 2010 — yet millions are still denied
+          it. Signing and promoting petitions, writing to elected representatives, and supporting parties
+          that prioritise international development funding all contribute to the systemic change that
+          individual charitable action cannot achieve alone.
+        </p>
+
+        <div class="stat-callout" role="region" aria-label="Call to action statistic">
+          <div class="big-stat">$1 → $4</div>
+          <p>
+            Every $1 invested in clean water and sanitation generates $4 in economic return through
+            reduced healthcare costs, increased productivity, and improved educational outcomes.
+          </p>
+        </div>
+
+
+
+
+
+
+
+
+        <p>
+          To explore more actions and calculate your personal impact score, visit the
+          <a href="ais.html">Action Impact Simulator</a>.
+        </p>
+      </section>
+
+    </div><!-- /content-body -->
+
+  </main>
+
+  <!-- GO TO TOP BUTTON – fixed, CSS only, always visible (required) -->
+  <a href="#top" class="go-top" aria-label="Go back to the top of the page">
+    &uarr; Top
+  </a>
+
+  <!-- FOOTER – copied from shared template (Student 1).
+     Updated: Page Editor and Validation links point to Student 2's pages. -->
+  <footer>
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <a href="home.html" class="logo">
+          <img src="logo.png" alt="Project Blue logo" style="width:38px;height:38px;">
+          <span class="logo-text">ProjectBlue</span>
+        </a>
+        <p>Project Blue is an independent student initiative raising awareness of the global clean water crisis. We
+          document its impact, highlight solutions, and advocate for the communities most affected in support of UN SDG
+          6.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <a href="home.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="ais.html">AIS</a>
+        <a href="profile.html">Profile</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="team.html">Team</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Student 2</h4>
+        <a href="pageEditor_ST2.html">Page Editor</a>
+        <a href="validation_ST2.html">Validation</a>
+        <a href="#accessibility" aria-label="Accessibility compliance statement">Accessibility</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div>All Rights Reserved &copy; 2026 ProjectBlue</div>
+      <div>Divya Sapkota | w2158226 | Student 2</div>
+      <div>Web Design &amp; Development</div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
